@@ -3,23 +3,11 @@ using namespace std;
 
 class UnionFind
 {
-public:
   vector<long long> par;
 
+public:
+  UnionFind() {}
   UnionFind(int n) : par(n, -1) {}
-  void init(int n)
-  {
-    par.assign(n, -1);
-  }
-
-  int root(int x)
-  {
-    if (par[x] < 0)
-    {
-      return x;
-    }
-    return par[x] = root(par[x]);
-  }
 
   bool is_same(int x, int y)
   {
@@ -46,5 +34,15 @@ public:
   long long size(int x)
   {
     return -par[root(x)];
+  }
+
+private:
+  int root(int x)
+  {
+    if (par[x] < 0)
+    {
+      return x;
+    }
+    return par[x] = root(par[x]);
   }
 };
