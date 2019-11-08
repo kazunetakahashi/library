@@ -1,5 +1,5 @@
 # library
 
-主に AtCoder 用。自分用です。
+AtCoder library for my own use.
 
-全部ではないですが、 snuke さんの解説放送をみてやっているので、すなわち[こちら](https://github.com/atcoder-live/library)を参考にしています。
+In some of my code, I follow [Snuke-san's repository](https://github.com/atcoder-live/library) and ["Programming Contest Challenge Book" 2nd Edition](https://amzn.to/2CsUBuU).
