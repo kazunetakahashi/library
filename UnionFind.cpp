@@ -3,11 +3,12 @@ using namespace std;
 
 class UnionFind
 {
-  vector<long long> par;
+  int N;
+  vector<int> par;
 
 public:
-  UnionFind() {}
-  UnionFind(int n) : par(n, -1) {}
+  UnionFind() : N{0} {}
+  UnionFind(int N) : N{N}, par(N, -1) {}
 
   bool is_same(int x, int y)
   {
@@ -31,9 +32,22 @@ public:
     return true;
   }
 
-  long long size(int x)
+  int size(int x)
   {
     return -par[root(x)];
+  }
+
+  int count_parts()
+  {
+    int ans{0};
+    for (auto i = 0; i < N; i++)
+    {
+      if (root(i) < 0)
+      {
+        ++ans;
+      }
+    }
+    return ans;
   }
 
 private:

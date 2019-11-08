@@ -1,50 +1,34 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 //----------------------------------
 
-template <class T>
+template <typename T>
 class SegTree
 { // 0-indexed, [0, N).
 private:
   int N;
-  T *dat;
-  T UNIT; // モノイドの単位元
-
-  static T func(T x, T y)
-  { // ここで演算を定義する。圏、特にモノイドであればなんでも良い。
-    // 実装はモノイドであるとする。
-    // return min(x, y);
-    return x + y;
-  }
-
-  static T _update(T x, T y)
-  { // update で 値をどうするかを書く。
-    // return y;
-    return func(x, y);
-  }
+  vector<T> dat;
+  T unit;  // モノイドの単位元
+  T(*func) // モノイドの演算
+  (T, T);
+  T(*_update) // update で値をどうするか書く
+  (T, T);
 
 public:
   SegTree() {}
 
-  SegTree(int n, T unit)
-  { // ここで unit を定義するのも変な実装だけどめんどいからこれでいい。
-    // min の場合は INFTY = (1LL << 60)
-    // + の場合は 0 とする。
-    UNIT = unit;
-    N = 1;
+  SegTree(int n, T unit, T (*func)(T, T), T (*_update)(T, T)) : N{1}, unit{unit}, func{func}, _update{_update}
+  {
     while (N < n)
     {
       N *= 2;
     }
-    dat = new T[2 * N - 1];
-    for (auto i = 0; i < 2 * N - 1; ++i)
-    {
-      dat[i] = UNIT;
-    }
+    dat = vector<T>(2 * N - 1, unit);
   }
 
   void update(int k, T a)
@@ -62,9 +46,13 @@ private:
   T find(int a, int b, int k, int l, int r)
   {
     if (r <= a || b <= l)
-      return UNIT;
+    {
+      return unit;
+    }
     if (a <= l && r <= b)
+    {
       return dat[k];
+    }
     T vl = find(a, b, k * 2 + 1, l, (l + r) / 2);
     T vr = find(a, b, k * 2 + 2, (l + r) / 2, r);
     return func(vl, vr);
@@ -81,4 +69,23 @@ public:
 
 int main()
 {
+  // min の場合
+  int N{100010};
+  auto func = [](auto x, auto y) {
+    return min(x, y);
+  };
+  auto _update = [](auto x, auto y) {
+    return min(x, y);
+  };
+  constexpr ll unit{1LL << 60};
+  SegTree<ll> tree{N, unit, func, _update};
+  // + の場合
+  auto func2 = [](auto x, auto y) {
+    return x + y;
+  };
+  auto _update2 = [](auto x, auto y) {
+    return y;
+  };
+  constexpr ll unit2{0LL};
+  SegTree<ll> tree2{N, unit2, func2, _update2};
 }

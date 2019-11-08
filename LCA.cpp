@@ -1,7 +1,8 @@
 #include <vector>
 using namespace std;
+using ll = long long;
 
-template <typename T>
+template <typename T = ll>
 class LCA
 {
   int N, root, L;
@@ -12,9 +13,8 @@ class LCA
   vector<vector<int>> par;
 
 public:
-  LCA(int n) : N{n}, to(n), co(n), dep(n), costs(n)
+  LCA(int n) : N{n}, L{0}, to(n), co(n), dep(n), costs(n)
   {
-    L = 0;
     while ((1 << L) < N)
     {
       ++L;

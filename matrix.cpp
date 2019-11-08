@@ -1,194 +1,267 @@
-#include <iostream>
+// matrix = 2-dim vector
+// very tiny library
+
 #include <vector>
+#include <cassert>
 using namespace std;
+using ll = long long;
 
-typedef long long ll;
+//------------------------------------------
 
-template <class T>
-class Matrix
+template <typename T = ll>
+using Vec = vector<T>;
+template <typename T = ll>
+using Mat = vector<Vec<T>>;
+
+// operators of Vec / Mat
+
+template <typename T = ll>
+Vec<T> operator+(Vec<T> const &A)
 {
-private:
-  int H, W;
-  T **a;
+  return A;
+}
 
-public:
-  Matrix() {}
+template <typename T = ll>
+Mat<T> operator+(Mat<T> const &A)
+{
+  return A;
+}
 
-  Matrix(int h, int w) : H(h), W(w)
+template <typename T = ll>
+Vec<T> operator+(Vec<T> const &A, Vec<T> const &B)
+{
+  assert(A.size() == B.size());
+  Vec<T> C(A.size());
+  for (auto i = 0u; i < A.size(); i++)
   {
-    a = new T *[H];
-    for (auto i = 0; i < H; i++)
+    C[i] = A[i] + B[i];
+  }
+  return C;
+}
+
+template <typename T = ll>
+Mat<T> operator+(Mat<T> const &A, Mat<T> const &B)
+{
+  assert(A.size() == B.size());
+  assert(A[0].size() == B[0].size());
+  Mat<T> C(A.size(), Vec<T>(A[0].size()));
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < A[0].size(); j++)
     {
-      a[i] = new T[W];
+      C[i][j] += A[i][j] + B[i][j];
     }
   }
+  return C;
+}
 
-  Matrix(const Matrix &A)
+template <typename T = ll>
+Vec<T> &operator+=(Vec<T> &A, Vec<T> const &B)
+{
+  assert(A.size() == B.size());
+  for (auto i = 0u; i < A.size(); i++)
   {
-    H = A.H;
-    W = A.W;
-    a = new T *[H];
-    for (auto i = 0; i < H; i++)
+    A[i] += B[i];
+  }
+  return A;
+}
+
+template <typename T = ll>
+Mat<T> &operator+=(Mat<T> &A, Mat<T> const &B)
+{
+  assert(A.size() == B.size());
+  assert(A[0].size() == B[0].size());
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < A[0].size(); j++)
     {
-      a[i] = new T[W];
+      A[i][j] += B[i][j];
     }
-    for (auto i = 0; i < H; i++)
+  }
+  return A;
+}
+
+template <typename T = ll>
+Vec<T> operator-(Vec<T> const &A)
+{
+  Vec<T> C(A.size());
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    C[i] = -A[i];
+  }
+  return C;
+}
+
+template <typename T = ll>
+Mat<T> operator-(Mat<T> const &A)
+{
+  Mat<T> C(A.size(), Vec<T>(A[0].size()));
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < A[0].size(); j++)
     {
-      for (auto j = 0; j < W; j++)
+      C[i][j] = -A[i][j];
+    }
+  }
+  return C;
+}
+
+template <typename T = ll>
+Vec<T> operator-(Vec<T> const &A, Vec<T> const &B)
+{
+  return A + (-B);
+}
+
+template <typename T = ll>
+Mat<T> operator-(Mat<T> const &A, Mat<T> const &B)
+{
+  return A + (-B);
+}
+
+template <typename T = ll>
+Vec<T> &operator-=(Vec<T> &A, Vec<T> const &B)
+{
+  return A += (-B);
+}
+
+template <typename T = ll>
+Mat<T> &operator-=(Mat<T> &A, Mat<T> const &B)
+{
+  return A += (-B);
+}
+
+template <typename T = ll>
+Vec<T> operator*(T K, Vec<T> const &A)
+{
+  Vec<T> C(A.size());
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    C[i] + A[i] * K;
+  }
+  return C;
+}
+
+template <typename T = ll>
+Mat<T> operator*(T K, Mat<T> const &A)
+{
+  Mat<T> C(A.size(), Vec<T>(A[0].size()));
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < A[0].size(); j++)
+    {
+      C[i][j] + A[i][j] * K;
+    }
+  }
+  return C;
+}
+
+template <typename T = ll>
+Vec<T> operator*(Vec<T> const &A, T K)
+{
+  return K * A;
+}
+
+template <typename T = ll>
+Mat<T> operator*(Mat<T> const &A, T K)
+{
+  return K * A;
+}
+
+template <typename T = ll>
+Vec<T> &operator*=(Vec<T> const &A, T K)
+{
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    A[i] *= K;
+  }
+  return A;
+}
+
+template <typename T = ll>
+Mat<T> operator*=(Mat<T> const &A, T K)
+{
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < A[0].size(); j++)
+    {
+      A[i][j] *= K;
+    }
+  }
+  return A;
+}
+
+template <typename T = ll>
+Vec<T> operator/(Vec<T> const &A, T K)
+{
+  return A * (1 / K);
+}
+
+template <typename T = ll>
+Mat<T> operator/(Mat<T> const &A, T K)
+{
+  return A * (1 / K);
+}
+
+template <typename T = ll>
+Vec<T> &operator/=(Vec<T> &A, T K)
+{
+  return A *= (1 / K);
+}
+
+template <typename T = ll>
+Mat<T> &operator/=(Mat<T> &A, T K)
+{
+  return A *= (1 / K);
+}
+
+// multiply operators
+
+template <typename T = ll>
+Mat<T> operator*(Mat<T> const &A, Mat<T> const &B)
+{
+  assert(A[0].size() == B.size());
+  Mat<T> C(A.size(), Vec<T>(B[0].size()));
+  for (auto i = 0u; i < A.size(); i++)
+  {
+    for (auto j = 0u; j < B[0].size(); j++)
+    {
+      for (auto k = 0u; k < A[0].size(); k++)
       {
-        a[i][j] = A.a[i][j];
+        C[i][j] += A[i][k] * B[k][j];
       }
     }
   }
+  return C;
+}
 
-  Matrix &operator=(const Matrix A)
+template <typename T = ll>
+Vec<T> operator*(Mat<T> const &A, Vec<T> const &V)
+{
+  assert(A[0].size() == V.size());
+  Vec<T> W(A.size());
+  for (auto i = 0u; i < A.size(); i++)
   {
-    H = A.H;
-    W = A.W;
-    a = new T *[H];
-    for (auto i = 0; i < H; i++)
+    for (auto j = 0; j < A[0].size(); j++)
     {
-      a[i] = new T[W];
+      W[i] += A[i][j] * V[j];
     }
-    for (auto i = 0; i < H; i++)
+  }
+  return W;
+}
+
+template <typename T = ll>
+Mat<T> power(Mat<T> const &A, ll N)
+{
+  assert(A.size() == A[0].size());
+  Mat<T> B(A.size(), Vec(A.size(), 1));
+  while (N > 0)
+  {
+    if (N & 1)
     {
-      for (auto j = 0; j < W; j++)
-      {
-        a[i][j] = A.a[i][j];
-      }
+      B *= A;
     }
-    return *this;
+    A *= A;
+    N >>= 1;
   }
-
-  Matrix &operator=(const vector<T> v)
-  {
-    assert((int)v.size() == H * W);
-    for (auto i = 0; i < H; i++)
-    {
-      for (auto j = 0; j < W; j++)
-      {
-        a[i][j] = v[i * W + j];
-      }
-    }
-    return *this;
-  }
-
-  const Matrix operator-() const
-  {
-    Matrix X(H, W);
-    for (auto i = 0; i < H; i++)
-    {
-      for (auto j = 0; j < W; j++)
-      {
-        X.a[i][j] = -a[i][j];
-      }
-    }
-    return X;
-  }
-
-  const Matrix operator+(const Matrix &A) const
-  {
-    assert(A.H == H);
-    assert(A.W == W);
-    Matrix X(H, W);
-    for (auto i = 0; i < H; i++)
-    {
-      for (auto j = 0; j < W; j++)
-      {
-        X.a[i][j] = a[i][j] + A.a[i][j];
-      }
-    }
-    return X;
-  }
-
-  const Matrix operator-(const Matrix &A) const
-  {
-    return this + (-A);
-  }
-
-  const Matrix operator*(const Matrix &A) const
-  {
-    assert(W == A.H);
-    Matrix X(H, A.W);
-    for (auto i = 0; i < X.H; i++)
-    {
-      for (auto j = 0; j < X.W; j++)
-      {
-        X.a[i][j] = 0;
-        for (auto k = 0; k < W; k++)
-        {
-          T t = a[i][k] * A.a[k][j];
-          X.a[i][j] += t;
-        }
-      }
-    }
-    return X;
-  }
-
-  Matrix &operator+=(const Matrix &A)
-  {
-    Matrix X = this + A;
-    this = X;
-    return this;
-  }
-
-  Matrix &operator-=(const Matrix &A)
-  {
-    return this += (-A);
-  }
-
-  Matrix &operator*=(const Matrix &A)
-  {
-    Matrix X = this * A;
-    this = X;
-    return this;
-  }
-
-  bool operator==(const Matrix &A) const
-  {
-    assert(H == A.H);
-    assert(W == A.W);
-    for (auto i = 0; i < H; i++)
-    {
-      for (auto j = 0; j < W; j++)
-      {
-        if (a[i][j] != A.a[i][j])
-        {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  bool operator!=(const Matrix &A) const
-  {
-    return !(this == A);
-  }
-
-  const T *&operator[](const size_t i) const
-  {
-    return a[i];
-  }
-
-  T *&operator[](const size_t i)
-  {
-    return a[i];
-  }
-
-  const Matrix power(ll N) const
-  {
-    assert(H == W);
-    // N > 0
-    if (N == 1)
-    {
-      return *this;
-    }
-    if (N % 2 == 1)
-    {
-      return power(N - 1) * (*this);
-    }
-    Matrix X = power(N / 2);
-    return X * X;
-  }
-};
+  return B;
+}

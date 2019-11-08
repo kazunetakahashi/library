@@ -6,11 +6,11 @@
 #include <queue>
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 // ------------------------------------------------------------
 
-typedef tuple<ll, int> Info;
+using Info = tuple<ll, int>;
 
 struct Edge
 {
@@ -22,37 +22,37 @@ struct Edge
 class MinCostFlow
 {
   int N;
-  vector<Edge> *G;
-  ll *h, *dist;
-  int *prev_v, *prev_e;
-  ll INFTY = 10000000000000010;
+  vector<vector<Edge>> G;
+  vector<ll> h, dist;
+  vector<int> prev_v, prev_e;
+  constexpr static ll INFTY = 10000000000000010LL;
 
 public:
   MinCostFlow() {}
 
   MinCostFlow(int n) : N(n)
   {
-    G = new vector<Edge>[n];
-    h = new ll[n];
-    dist = new ll[n];
-    prev_v = new int[n];
-    prev_e = new int[n];
+    G.resize(N);
+    h.resize(N);
+    dist.resize(N);
+    prev_v.resize(N);
+    prev_e.resize(N);
   }
 
   void add_edge(int from, int to, ll cap, ll cost)
   {
-    G[from].push_back((Edge){to, cap, cost, (int)G[to].size()});
-    G[to].push_back((Edge){from, 0, -cost, (int)G[from].size() - 1});
+    G[from].emplace_back(to, cap, cost, static_cast<int>(G[to].size()));
+    G[to].emplace_back(from, 0, -cost, static_cast<int>(G[from].size() - 1));
   }
 
   ll min_cost_flow(int s, int t, ll f)
   {
     ll res = 0;
-    fill(h, h + N, 0);
+    fill(h.begin(), h.end(), 0);
     while (f > 0)
     {
       priority_queue<Info, vector<Info>, greater<Info>> Q;
-      fill(dist, dist + N, INFTY);
+      fill(dist.begin(), dist.end(), INFTY);
       dist[s] = 0;
       Q.push(Info(0, s));
       while (!Q.empty())
