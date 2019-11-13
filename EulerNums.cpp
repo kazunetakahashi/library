@@ -3,6 +3,8 @@
 using namespace std;
 using ll = long long;
 
+// ----- EulerNums
+
 class EulerNums
 {
   static constexpr ll MAX_SIZE{1000010LL};

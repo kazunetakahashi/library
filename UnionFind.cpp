@@ -1,6 +1,8 @@
 #include <vector>
 using namespace std;
 
+// ----- UnionFind
+
 class UnionFind
 {
   int N;

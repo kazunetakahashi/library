@@ -5,7 +5,7 @@ using namespace std;
 
 using ll = long long;
 
-//----------------------------------
+// ----- SegTree
 
 template <typename T>
 class SegTree
@@ -65,27 +65,25 @@ public:
   }
 };
 
-//----------------------------------
+// ----- frequently used examples
 
-int main()
-{
-  // min の場合
-  int N{100010};
-  auto func = [](auto x, auto y) {
-    return min(x, y);
-  };
-  auto _update = [](auto x, auto y) {
-    return min(x, y);
-  };
-  constexpr ll unit{1LL << 60};
-  SegTree<ll> tree{N, unit, func, _update};
-  // + の場合
-  auto func2 = [](auto x, auto y) {
-    return x + y;
-  };
-  auto _update2 = [](auto x, auto y) {
-    return y;
-  };
-  constexpr ll unit2{0LL};
-  SegTree<ll> tree2{N, unit2, func2, _update2};
-}
+// for min
+int N{100010};
+auto func = [](auto x, auto y) {
+  return min(x, y);
+};
+auto _update = [](auto x, auto y) {
+  return min(x, y);
+};
+constexpr ll unit{1LL << 60};
+SegTree<ll> tree{N, unit, func, _update};
+
+// for +
+auto func2 = [](auto x, auto y) {
+  return x + y;
+};
+auto _update2 = [](auto x, auto y) {
+  return y;
+};
+constexpr ll unit2{0LL};
+SegTree<ll> tree2{N, unit2, func2, _update2};

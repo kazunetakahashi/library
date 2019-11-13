@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 
-//--------------最大フロー最小カット--------------------
+// ----- MaxFlow
 
 struct Edge
 {

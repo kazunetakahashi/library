@@ -7,6 +7,8 @@ using ll = long long;
 // for C++14
 ll gcd(ll x, ll y) { return y ? gcd(y, x % y) : x; }
 
+// ----- LinearMod
+
 class LinearMod
 {
   vector<ll> A, B, M;
@@ -64,4 +66,4 @@ private:
     extra_gcd(a, m, x, y);
     return (m + x % m) % m;
   }
-}; 
+};

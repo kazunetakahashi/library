@@ -2,6 +2,8 @@
 using namespace std;
 using ll = long long;
 
+// ----- LCA
+
 template <typename T = ll>
 class LCA
 {
