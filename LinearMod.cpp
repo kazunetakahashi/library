@@ -7,7 +7,7 @@ using ll = long long;
 // for C++14
 ll gcd(ll x, ll y) { return y ? gcd(y, x % y) : x; }
 
-// ----- LinearMod
+// ----- LinearMod -----
 
 class LinearMod
 {

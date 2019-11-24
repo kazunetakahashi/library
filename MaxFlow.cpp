@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 
-// ----- MaxFlow
+// ----- MaxFlow -----
 
 struct Edge
 {

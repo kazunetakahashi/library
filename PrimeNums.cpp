@@ -3,7 +3,7 @@
 using namespace std;
 using ll = long long;
 
-// ----- PrimeNums
+// ----- PrimeNums -----
 
 class PrimeNums
 {

@@ -6,7 +6,7 @@
 using namespace std;
 using ll = long long;
 
-// ----- Mat and Vec
+// ----- Mat and Vec -----
 
 template <typename T = ll>
 using Vec = vector<T>;

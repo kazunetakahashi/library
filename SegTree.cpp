@@ -5,7 +5,7 @@ using namespace std;
 
 using ll = long long;
 
-// ----- SegTree
+// ----- SegTree -----
 
 template <typename T>
 class SegTree
@@ -65,10 +65,11 @@ public:
   }
 };
 
-// ----- frequently used examples
+// ----- frequently used examples -----
+
+int N{100010};
 
 // for min
-int N{100010};
 auto func = [](auto x, auto y) {
   return min(x, y);
 };

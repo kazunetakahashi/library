@@ -3,7 +3,7 @@
 using namespace std;
 using ll = long long;
 
-// ----- EulerNums
+// ----- EulerNums -----
 
 class EulerNums
 {

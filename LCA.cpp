@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 
-// ----- LCA
+// ----- LCA -----
 
 template <typename T = ll>
 class LCA

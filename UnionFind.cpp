@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-// ----- UnionFind
+// ----- UnionFind -----
 
 class UnionFind
 {
@@ -44,7 +44,7 @@ public:
     int ans{0};
     for (auto i = 0; i < N; i++)
     {
-      if (root(i) < 0)
+      if (par[i] < 0)
       {
         ++ans;
       }
