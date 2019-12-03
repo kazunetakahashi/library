@@ -1,19 +1,20 @@
+#include <iostream>
 #include <vector>
 using namespace std;
 using ll = long long;
 
 // ----- MaxFlow -----
 
-struct Edge
-{
-  int to;
-  ll cap;
-  int rev;
-};
-
 class MaxFlow
 {
+  struct Edge
+  {
+    int to;
+    ll cap;
+    int rev;
+  };
   constexpr static ll INFTY = 10000000000000010LL;
+
   int N;
   vector<vector<Edge>> G;
   vector<bool> used;
@@ -26,10 +27,10 @@ public:
     used.resize(N);
   }
 
-  void add_edge(int from, int to, ll cap)
+  void add_edge(int from, int to, ll cap = 1LL)
   {
-    G[from].emplace_back(to, cap, static_cast<int>(G[to].size()));
-    G[to].emplace_back(from, 0, static_cast<int>(G[from].size() - 1));
+    G[from].push_back({to, cap, static_cast<int>(G[to].size())});
+    G[to].push_back({from, 0, static_cast<int>(G[from].size() - 1)});
   }
 
   ll max_flow(int s, int t)
@@ -74,6 +75,19 @@ private:
 
 //---------------------------------------------------
 
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=jp
+
 int main()
 {
+  int N, M;
+  cin >> N >> M;
+  MaxFlow flow{N};
+  for (auto i = 0; i < M; i++)
+  {
+    int from, to;
+    ll cap;
+    cin >> from >> to >> cap;
+    flow.add_edge(from, to, cap);
+  }
+  cout << flow.max_flow(0, N - 1) << endl;
 }
