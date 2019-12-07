@@ -8,19 +8,64 @@ using namespace std;
 
 class SuffixArray
 {
+public:
+  // Sparse Table from drken-san
+  // http://drken1215.hatenablog.com/entry/2019/09/16/014600
+  template <class T = int>
+  class SparseTable
+  {
+    vector<vector<T>> dat;
+    vector<int> height;
+
+  public:
+    SparseTable() {}
+    SparseTable(vector<T> const &V)
+    {
+      int N{static_cast<int>(V.size())}, h{0};
+      while ((1 << h) < N)
+      {
+        ++h;
+      }
+      dat.assign(h, vector<T>(1 << h));
+      height.assign(N + 1, 0);
+      for (int i = 2; i <= N; i++)
+      {
+        height[i] = height[i >> 1] + 1;
+      }
+      for (int i = 0; i < N; ++i)
+      {
+        dat[0][i] = V[i];
+      }
+      for (int i = 1; i < h; ++i)
+      {
+        for (int j = 0; j < N; ++j)
+        {
+          dat[i][j] = min(dat[i - 1][j], dat[i - 1][min(j + (1 << (i - 1)), N - 1)]);
+        }
+      }
+    }
+
+    T get(int a, int b) const
+    {
+      return min(dat[height[b - a]][a], dat[height[b - a]][b - (1 << height[b - a])]);
+    }
+  };
+
+private:
   int N, K;
   string S;
-  vector<int> sa, lcp;
+  vector<int> rank, sa, lcp;
+  SparseTable<int> st;
 
 public:
-  SuffixArray(string S) : N{static_cast<int>(S.size())}, K{1}, S{S}, sa(N + 1), lcp(N)
+  SuffixArray() {}
+  SuffixArray(string S) : N{static_cast<int>(S.size())}, K{1}, S{S}, rank(N + 1), sa(N + 1), lcp(N)
   {
     // initialize for 1 char
     for (auto i = 0; i <= N; i++)
     {
       sa[i] = i;
     }
-    vector<int> rank(N + 1);
     for (auto i = 0; i < N; i++)
     {
       rank[i] = static_cast<int>(S[i]);
@@ -74,6 +119,7 @@ public:
       }
       lcp[rank[i] - 1] = h;
     }
+    st = SparseTable<int>(lcp);
   }
 
   int operator[](int i) const
@@ -81,9 +127,14 @@ public:
     return sa[i];
   }
 
-  vector<int> const &LCP()
+  vector<int> const &LCP() const
   {
     return lcp;
+  }
+
+  int LCP(int a, int b) const
+  {
+    return st.get(min(rank[a], rank[b]), max(rank[a], rank[b]));
   }
 
   bool contain(string const &T) const
