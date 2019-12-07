@@ -10,10 +10,10 @@ class SuffixArray
 {
   int N, K;
   string S;
-  vector<int> sa;
+  vector<int> sa, lcp;
 
 public:
-  SuffixArray(string S) : N{static_cast<int>(S.size())}, K{1}, S{S}, sa(N + 1)
+  SuffixArray(string S) : N{static_cast<int>(S.size())}, K{1}, S{S}, sa(N + 1), lcp(N)
   {
     // initialize for 1 char
     for (auto i = 0; i <= N; i++)
@@ -51,11 +51,39 @@ public:
       }
       swap(rank, tmp);
     }
+    // construct lcp with sa and rank
+    for (auto i = 0; i <= N; i++)
+    {
+      rank[sa[i]] = i;
+    }
+    int h{0};
+    lcp[0] = 0;
+    for (auto i = 0; i < N; i++)
+    {
+      int j{sa[rank[i] - 1]};
+      if (h > 0)
+      {
+        --h;
+      }
+      for (; j + h < N && i + h < N; ++h)
+      {
+        if (S[j + h] != S[i + h])
+        {
+          break;
+        }
+      }
+      lcp[rank[i] - 1] = h;
+    }
   }
 
   int operator[](int i) const
   {
     return sa[i];
+  }
+
+  vector<int> const &LCP()
+  {
+    return lcp;
   }
 
   bool contain(string const &T) const
@@ -118,7 +146,7 @@ private:
 
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D&lang=ja
 
-void solve()
+void solve_contain()
 {
   string S;
   int Q;
@@ -135,10 +163,50 @@ void solve()
   }
 }
 
-int main()
+void solve_count()
 {
   string S, T;
   cin >> S >> T;
   SuffixArray sa(S);
   cout << sa.count(T) << endl;
+}
+
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528
+
+template <typename T>
+void ch_max(T &left, T right)
+{
+  if (left < right)
+  {
+    left = right;
+  }
+}
+
+int common_sub_string(string const &S, string const &T)
+{
+  string U{S + "$" + T};
+  int L{static_cast<int>(S.size())};
+  SuffixArray sa{U};
+  int ans{0};
+  for (auto i = 0; i < static_cast<int>(U.size()); i++)
+  {
+    if ((sa[i] < L) ^ (sa[i + 1] < L))
+    {
+      ch_max(ans, sa.LCP()[i]);
+    }
+  }
+  return ans;
+}
+
+void solve_common_sub_string()
+{
+  string S, T;
+  while (cin >> S >> T)
+  {
+    cout << common_sub_string(S, T) << endl;
+  }
+}
+
+int main()
+{
 }
