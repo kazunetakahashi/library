@@ -52,7 +52,10 @@ public:
     }
     for (auto &e : match)
     {
-      e->used = true;
+      if (e)
+      {
+        e->used = true;
+      }
     }
     return res;
   }
