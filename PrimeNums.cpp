@@ -13,9 +13,8 @@ class PrimeNums
   vector<int> prime_nums;
 
 public:
-  PrimeNums(ll N = MAX_SIZE) : N{N}
+  PrimeNums(ll N = MAX_SIZE) : N{N}, isprime(N, true), prime_nums{}
   {
-    isprime.resize(N, true);
     isprime[0] = isprime[1] = false;
     for (auto i = 2; i < N; i++)
     {
