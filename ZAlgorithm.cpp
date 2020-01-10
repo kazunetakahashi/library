@@ -7,15 +7,16 @@ using namespace std;
 // ----- ZAlgorithm -----
 // from drken-san: http://drken1215.hatenablog.com/entry/2019/09/16/014600
 
+template <typename Type = string>
 class ZAlgorithm
 {
   int N;
-  string S;
+  Type S;
   vector<int> V;
 
 public:
   ZAlgorithm() {}
-  ZAlgorithm(string const &S) : N{static_cast<int>(S.size())}, S{S}, V(N)
+  ZAlgorithm(Type const &S) : N{static_cast<int>(S.size())}, S{S}, V(N)
   {
     V[0] = N;
     int i{1}, j{0};
@@ -59,7 +60,7 @@ int main()
   for (int i = 0; i < N; ++i)
   {
     string T{S.substr(i)};
-    ZAlgorithm Z(T);
+    ZAlgorithm<string> Z(T);
     for (int j = 0; j < static_cast<int>(T.size()); ++j)
     {
       ans = max(ans, min(Z[j], j));

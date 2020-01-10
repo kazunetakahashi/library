@@ -6,12 +6,13 @@ using namespace std;
 
 // ----- SuffixArray -----
 
+template <typename Type = string>
 class SuffixArray
 {
 public:
   // Sparse Table from drken-san
   // http://drken1215.hatenablog.com/entry/2019/09/16/014600
-  template <class T = int>
+  template <typename T = int>
   class SparseTable
   {
     vector<vector<T>> dat;
@@ -53,13 +54,13 @@ public:
 
 private:
   int N, K;
-  string S;
+  Type S;
   vector<int> rank, sa, lcp;
   SparseTable<int> st;
 
 public:
   SuffixArray() {}
-  SuffixArray(string S) : N{static_cast<int>(S.size())}, K{1}, S{S}, rank(N + 1), sa(N + 1), lcp(N)
+  SuffixArray(Type const &S) : N{static_cast<int>(S.size())}, K{1}, S{S}, rank(N + 1), sa(N + 1), lcp(N)
   {
     // initialize for 1 char
     for (auto i = 0; i <= N; i++)
@@ -137,13 +138,13 @@ public:
     return st.get(min(rank[a], rank[b]), max(rank[a], rank[b]));
   }
 
-  bool contain(string const &T) const
+  bool contain(Type const &T) const
   {
     int b{lower_bound(T)};
     return b <= N && S.compare(sa[b], T.size(), T) == 0;
   }
 
-  int count(string const &T) const
+  int count(Type const &T) const
   {
     int lb{lower_bound(T)};
     int ub{upper_bound(T)};
@@ -172,7 +173,7 @@ private:
     }
   }
 
-  int lower_bound(string const &T) const
+  int lower_bound(Type const &T) const
   {
     int a{-1}, b{N + 1};
     auto cmp = [&](auto c) {
@@ -182,7 +183,7 @@ private:
     return b;
   }
 
-  int upper_bound(string const &T) const
+  int upper_bound(Type const &T) const
   {
     int a{-1}, b{N + 1};
     auto cmp = [&](auto c) {
@@ -207,7 +208,7 @@ void solve_contain()
   {
     cin >> T[i];
   }
-  SuffixArray sa(S);
+  SuffixArray<string> sa(S);
   for (auto i = 0; i < Q; i++)
   {
     cout << (sa.contain(T[i]) ? 1 : 0) << endl;
@@ -218,7 +219,7 @@ void solve_count()
 {
   string S, T;
   cin >> S >> T;
-  SuffixArray sa(S);
+  SuffixArray<string> sa(S);
   cout << sa.count(T) << endl;
 }
 
@@ -237,7 +238,7 @@ int common_sub_string(string const &S, string const &T)
 {
   string U{S + "$" + T};
   int L{static_cast<int>(S.size())};
-  SuffixArray sa{U};
+  SuffixArray<string> sa{U};
   int ans{0};
   for (auto i = 0; i < static_cast<int>(U.size()); i++)
   {
