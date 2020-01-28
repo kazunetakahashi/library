@@ -44,12 +44,12 @@ layout: default
 * :warning: <a href="library/FFT.cpp.html">FFT.cpp</a>
 * :warning: <a href="library/KMP.cpp.html">KMP.cpp</a>
 * :warning: <a href="library/LCA.cpp.html">LCA.cpp</a>
-* :warning: <a href="library/LazySegTree.cpp.html">LazySegTree.cpp</a>
 * :warning: <a href="library/LinearMod.cpp.html">LinearMod.cpp</a>
 * :warning: <a href="library/Matrix.cpp.html">Matrix.cpp</a>
 * :warning: <a href="library/MaxFlow.cpp.html">MaxFlow.cpp</a>
 * :warning: <a href="library/MinCostFlow.cpp.html">MinCostFlow.cpp</a>
 * :warning: <a href="library/RangeAddQuery.cpp.html">RangeAddQuery.cpp</a>
+* :warning: <a href="library/SegTree-delay.cpp.html">SegTree-delay.cpp</a>
 * :warning: <a href="library/SegTree.cpp.html">SegTree.cpp</a>
 * :warning: <a href="library/Sieve.cpp.html">Sieve.cpp</a>
 * :warning: <a href="library/SuffixArray.cpp.html">SuffixArray.cpp</a>
