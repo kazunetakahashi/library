@@ -31,9 +31,10 @@ layout: default
 
 * category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
 * <a href="{{ site.github.repository_url }}/blob/master/RangeAddQuery.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-27 14:29:04+09:00
+    - Last commit date: 2020-01-28 18:18:22+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja</a>
 
 
 ## Code
@@ -41,10 +42,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
+
+/*
+  add(s,t,x): add x to a_i for i \in [s, t).
+  get(i): output the value of a_i.
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
 using ll = long long;
+
+// ----- RangeAddQuery -----
 
 template <typename T = ll>
 class RangeAddQuery
@@ -88,7 +98,7 @@ private:
   }
 };
 
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+// ----- main -----
 
 int main()
 {
@@ -125,10 +135,19 @@ int main()
 {% raw %}
 ```cpp
 #line 1 "RangeAddQuery.cpp"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
+
+/*
+  add(s,t,x): add x to a_i for i \in [s, t).
+  get(i): output the value of a_i.
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
 using ll = long long;
+
+// ----- RangeAddQuery -----
 
 template <typename T = ll>
 class RangeAddQuery
@@ -172,7 +191,7 @@ private:
   }
 };
 
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+// ----- main -----
 
 int main()
 {
