@@ -48,6 +48,7 @@ layout: default
 * :warning: <a href="library/Matrix.cpp.html">Matrix.cpp</a>
 * :warning: <a href="library/MaxFlow.cpp.html">MaxFlow.cpp</a>
 * :warning: <a href="library/MinCostFlow.cpp.html">MinCostFlow.cpp</a>
+* :warning: <a href="library/RangeAddQuery.cpp.html">RangeAddQuery.cpp</a>
 * :warning: <a href="library/SegTree.cpp.html">SegTree.cpp</a>
 * :warning: <a href="library/Sieve.cpp.html">Sieve.cpp</a>
 * :warning: <a href="library/SuffixArray.cpp.html">SuffixArray.cpp</a>
