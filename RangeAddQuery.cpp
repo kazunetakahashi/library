@@ -1,7 +1,16 @@
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
+
+/*
+  add(s,t,x): add x to a_i for i \in [s, t).
+  get(i): output the value of a_i.
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
 using ll = long long;
+
+// ----- RangeAddQuery -----
 
 template <typename T = ll>
 class RangeAddQuery
@@ -45,7 +54,7 @@ private:
   }
 };
 
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+// ----- main -----
 
 int main()
 {
