@@ -39,7 +39,7 @@ public:
   { // 2 \leq x \leq MAX_SIZE^2
     if (x < N)
     {
-      return f[x];
+      return f[x] == x;
     }
     for (auto e : prime_nums)
     {
