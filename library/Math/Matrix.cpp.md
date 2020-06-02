@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: Matrix.cpp
+# :warning: Math/Matrix.cpp
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 
-* category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Matrix.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-11-24 16:29:17+09:00
+* category: <a href="../../index.html#a49950aa047c2292e989e368a97a3aae">Math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-06-02 17:08:46+09:00
 
 
 
@@ -41,9 +41,6 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-// matrix = 2-dim vector
-// very tiny library
-
 #include <vector>
 #include <cassert>
 using namespace std;
@@ -75,7 +72,7 @@ Vec<T> operator+(Vec<T> const &A, Vec<T> const &B)
 {
   assert(A.size() == B.size());
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] = A[i] + B[i];
   }
@@ -88,9 +85,9 @@ Mat<T> operator+(Mat<T> const &A, Mat<T> const &B)
   assert(A.size() == B.size());
   assert(A[0].size() == B[0].size());
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] += A[i][j] + B[i][j];
     }
@@ -102,7 +99,7 @@ template <typename T = ll>
 Vec<T> &operator+=(Vec<T> &A, Vec<T> const &B)
 {
   assert(A.size() == B.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     A[i] += B[i];
   }
@@ -114,9 +111,9 @@ Mat<T> &operator+=(Mat<T> &A, Mat<T> const &B)
 {
   assert(A.size() == B.size());
   assert(A[0].size() == B[0].size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       A[i][j] += B[i][j];
     }
@@ -128,7 +125,7 @@ template <typename T = ll>
 Vec<T> operator-(Vec<T> const &A)
 {
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] = -A[i];
   }
@@ -139,9 +136,9 @@ template <typename T = ll>
 Mat<T> operator-(Mat<T> const &A)
 {
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] = -A[i][j];
     }
@@ -177,7 +174,7 @@ template <typename T = ll>
 Vec<T> operator*(T K, Vec<T> const &A)
 {
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] + A[i] * K;
   }
@@ -188,9 +185,9 @@ template <typename T = ll>
 Mat<T> operator*(T K, Mat<T> const &A)
 {
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] + A[i][j] * K;
     }
@@ -213,7 +210,7 @@ Mat<T> operator*(Mat<T> const &A, T K)
 template <typename T = ll>
 Vec<T> &operator*=(Vec<T> const &A, T K)
 {
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     A[i] *= K;
   }
@@ -223,9 +220,9 @@ Vec<T> &operator*=(Vec<T> const &A, T K)
 template <typename T = ll>
 Mat<T> operator*=(Mat<T> const &A, T K)
 {
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       A[i][j] *= K;
     }
@@ -257,6 +254,20 @@ Mat<T> &operator/=(Mat<T> &A, T K)
   return A *= (1 / K);
 }
 
+// generator of unit matrix
+// call example: Mat<T> A{unit_matrix<T>(s)};
+
+template <typename T = ll>
+Mat<T> unit_matrix(size_t s)
+{
+  Mat<T> res(s, Vec<T>(s, T{0}));
+  for (auto i = size_t{0}; i < s; ++i)
+  {
+    res[i][i] = T{1};
+  }
+  return res;
+}
+
 // multiply operators
 
 template <typename T = ll>
@@ -264,11 +275,11 @@ Mat<T> operator*(Mat<T> const &A, Mat<T> const &B)
 {
   assert(A[0].size() == B.size());
   Mat<T> C(A.size(), Vec<T>(B[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < B[0].size(); j++)
+    for (auto j = size_t{0}; j < B[0].size(); j++)
     {
-      for (auto k = 0u; k < A[0].size(); k++)
+      for (auto k = size_t{0}; k < A[0].size(); k++)
       {
         C[i][j] += A[i][k] * B[k][j];
       }
@@ -278,13 +289,20 @@ Mat<T> operator*(Mat<T> const &A, Mat<T> const &B)
 }
 
 template <typename T = ll>
+Mat<T> &operator*=(Mat<T> &A, Mat<T> const &B)
+{
+  auto C{A * B};
+  return A = C;
+}
+
+template <typename T = ll>
 Vec<T> operator*(Mat<T> const &A, Vec<T> const &V)
 {
   assert(A[0].size() == V.size());
   Vec<T> W(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       W[i] += A[i][j] * V[j];
     }
@@ -296,17 +314,16 @@ template <typename T = ll>
 Mat<T> power(Mat<T> const &A, ll N)
 {
   assert(A.size() == A[0].size());
-  Mat<T> B(A.size(), Vec(A.size(), 1));
-  while (N > 0)
+  if (N == 0)
   {
-    if (N & 1)
-    {
-      B *= A;
-    }
-    A *= A;
-    N >>= 1;
+    return unit_matrix<T>(A.size());
   }
-  return B;
+  if ((N & 1) == 1)
+  {
+    return A * power(A, N - 1);
+  }
+  auto B{power(A, N / 2)};
+  return B * B;
 }
 
 ```
@@ -315,10 +332,7 @@ Mat<T> power(Mat<T> const &A, ll N)
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Matrix.cpp"
-// matrix = 2-dim vector
-// very tiny library
-
+#line 1 "Math/Matrix.cpp"
 #include <vector>
 #include <cassert>
 using namespace std;
@@ -350,7 +364,7 @@ Vec<T> operator+(Vec<T> const &A, Vec<T> const &B)
 {
   assert(A.size() == B.size());
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] = A[i] + B[i];
   }
@@ -363,9 +377,9 @@ Mat<T> operator+(Mat<T> const &A, Mat<T> const &B)
   assert(A.size() == B.size());
   assert(A[0].size() == B[0].size());
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] += A[i][j] + B[i][j];
     }
@@ -377,7 +391,7 @@ template <typename T = ll>
 Vec<T> &operator+=(Vec<T> &A, Vec<T> const &B)
 {
   assert(A.size() == B.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     A[i] += B[i];
   }
@@ -389,9 +403,9 @@ Mat<T> &operator+=(Mat<T> &A, Mat<T> const &B)
 {
   assert(A.size() == B.size());
   assert(A[0].size() == B[0].size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       A[i][j] += B[i][j];
     }
@@ -403,7 +417,7 @@ template <typename T = ll>
 Vec<T> operator-(Vec<T> const &A)
 {
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] = -A[i];
   }
@@ -414,9 +428,9 @@ template <typename T = ll>
 Mat<T> operator-(Mat<T> const &A)
 {
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] = -A[i][j];
     }
@@ -452,7 +466,7 @@ template <typename T = ll>
 Vec<T> operator*(T K, Vec<T> const &A)
 {
   Vec<T> C(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     C[i] + A[i] * K;
   }
@@ -463,9 +477,9 @@ template <typename T = ll>
 Mat<T> operator*(T K, Mat<T> const &A)
 {
   Mat<T> C(A.size(), Vec<T>(A[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       C[i][j] + A[i][j] * K;
     }
@@ -488,7 +502,7 @@ Mat<T> operator*(Mat<T> const &A, T K)
 template <typename T = ll>
 Vec<T> &operator*=(Vec<T> const &A, T K)
 {
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
     A[i] *= K;
   }
@@ -498,9 +512,9 @@ Vec<T> &operator*=(Vec<T> const &A, T K)
 template <typename T = ll>
 Mat<T> operator*=(Mat<T> const &A, T K)
 {
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       A[i][j] *= K;
     }
@@ -532,6 +546,20 @@ Mat<T> &operator/=(Mat<T> &A, T K)
   return A *= (1 / K);
 }
 
+// generator of unit matrix
+// call example: Mat<T> A{unit_matrix<T>(s)};
+
+template <typename T = ll>
+Mat<T> unit_matrix(size_t s)
+{
+  Mat<T> res(s, Vec<T>(s, T{0}));
+  for (auto i = size_t{0}; i < s; ++i)
+  {
+    res[i][i] = T{1};
+  }
+  return res;
+}
+
 // multiply operators
 
 template <typename T = ll>
@@ -539,11 +567,11 @@ Mat<T> operator*(Mat<T> const &A, Mat<T> const &B)
 {
   assert(A[0].size() == B.size());
   Mat<T> C(A.size(), Vec<T>(B[0].size()));
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0u; j < B[0].size(); j++)
+    for (auto j = size_t{0}; j < B[0].size(); j++)
     {
-      for (auto k = 0u; k < A[0].size(); k++)
+      for (auto k = size_t{0}; k < A[0].size(); k++)
       {
         C[i][j] += A[i][k] * B[k][j];
       }
@@ -553,13 +581,20 @@ Mat<T> operator*(Mat<T> const &A, Mat<T> const &B)
 }
 
 template <typename T = ll>
+Mat<T> &operator*=(Mat<T> &A, Mat<T> const &B)
+{
+  auto C{A * B};
+  return A = C;
+}
+
+template <typename T = ll>
 Vec<T> operator*(Mat<T> const &A, Vec<T> const &V)
 {
   assert(A[0].size() == V.size());
   Vec<T> W(A.size());
-  for (auto i = 0u; i < A.size(); i++)
+  for (auto i = size_t{0}; i < A.size(); i++)
   {
-    for (auto j = 0; j < A[0].size(); j++)
+    for (auto j = size_t{0}; j < A[0].size(); j++)
     {
       W[i] += A[i][j] * V[j];
     }
@@ -571,21 +606,20 @@ template <typename T = ll>
 Mat<T> power(Mat<T> const &A, ll N)
 {
   assert(A.size() == A[0].size());
-  Mat<T> B(A.size(), Vec(A.size(), 1));
-  while (N > 0)
+  if (N == 0)
   {
-    if (N & 1)
-    {
-      B *= A;
-    }
-    A *= A;
-    N >>= 1;
+    return unit_matrix<T>(A.size());
   }
-  return B;
+  if ((N & 1) == 1)
+  {
+    return A * power(A, N - 1);
+  }
+  auto B{power(A, N / 2)};
+  return B * B;
 }
 
 ```
 {% endraw %}
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 

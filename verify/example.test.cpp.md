@@ -29,6 +29,7 @@ layout: default
 
 <a href="../index.html">Back to top page</a>
 
+* category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
 * <a href="{{ site.github.repository_url }}/blob/master/example.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-01-28 17:58:27+09:00
 

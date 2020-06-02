@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: SegTree-delay.cpp
+# :warning: DataStructure/SegTree-delay.cpp
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 
-* category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
-* <a href="{{ site.github.repository_url }}/blob/master/SegTree-delay.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-28 20:46:45+09:00
+* category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegTree-delay.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-06-02 17:08:46+09:00
 
 
 
@@ -50,6 +50,8 @@ using namespace std;
 using ll = long long;
 
 // ----- SegTree -----
+// This source code can be compiled only by C++17 or upper version. C++14 or lower is not allowed.
+// Referring to https://beet-aizu.github.io/library/library/segtree/basic/chien.cpp.html
 
 template <typename T, typename U>
 class SegTree
@@ -156,7 +158,7 @@ private:
 
   inline void propagate_down(int k)
   {
-    for (auto i = height; i >= 0; i--)
+    for (auto i = height; i; i--)
     {
       propagate(k >> i);
     }
@@ -173,12 +175,32 @@ private:
 
 class RMQ_RUQ : public SegTree<ll, ll>
 {
+  /*
   constexpr static auto update_T{[](auto a, auto b) { return min(a, b); }};
   constexpr static auto update_U{[](auto a, auto b) { return b; }};
+  */
   constexpr static ll INFTY{2147483647LL};
 
 public:
+  /*
   RMQ_RUQ(int N) : SegTree<ll, ll>{N, update_T, update_U, update_U, INFTY, INFTY} {};
+  */
+  RMQ_RUQ(int N) : SegTree<ll, ll>{N, [](auto a, auto b) { return min(a, b); }, [](auto a, auto b) { return b; }, [](auto a, auto b) { return b; }, INFTY, INFTY} {};
+};
+
+class RMQ_RAQ : public SegTree<ll, ll>
+{
+  /*
+  constexpr static auto update_T{[](auto a, auto b) { return min(a, b); }};
+  constexpr static auto update_U{[](auto a, auto b) { return a + b; }};
+  */
+  constexpr static ll INFTY{2147483647LL};
+
+public:
+  /*
+  RMQ_RAQ(int N) : SegTree<ll, ll>{N, update_T, update_U, update_U, INFTY, 0} {};
+  */
+  RMQ_RAQ(int N) : SegTree<ll, ll>{N, [](auto a, auto b) { return min(a, b); }, [](auto a, auto b) { return a + b; }, [](auto a, auto b) { return a + b; }, INFTY, 0} {};
 };
 
 class RSQ_RAQ : public SegTree<tuple<ll, ll>, ll>
@@ -190,6 +212,20 @@ class RSQ_RAQ : public SegTree<tuple<ll, ll>, ll>
 
 public:
   RSQ_RAQ(int N) : SegTree<tuple<ll, ll>, ll>{N, update_T, merge, update_U, Pair(0, 0), 0, Pair(0, 1)} {};
+
+  ll query(int a, int b) { return get<0>(SegTree<tuple<ll, ll>, ll>::query(a, b)); }
+};
+
+class RSQ_RUQ : public SegTree<tuple<ll, ll>, ll>
+{
+  using Pair = tuple<ll, ll>;
+  constexpr static auto update_T{[](Pair a, Pair b) { return Pair(get<0>(a) + get<0>(b), get<1>(a) + get<1>(b)); }};
+  constexpr static auto merge{[](Pair a, auto b) { return Pair(get<0>(a) + b * get<1>(a), get<1>(a)); }};
+  constexpr static auto update_U{[](auto a, auto b) { return b; }};
+  constexpr static ll INFTY{2147483647LL};
+
+public:
+  RSQ_RUQ(int N) : SegTree<tuple<ll, ll>, ll>{N, update_T, merge, update_U, Pair(0, 0), -INFTY, Pair(0, 1)} {};
 
   ll query(int a, int b) { return get<0>(SegTree<tuple<ll, ll>, ll>::query(a, b)); }
 };
@@ -243,7 +279,7 @@ int main()
     if (c == 1)
     {
       int s, t;
-      cin >> s >> t;
+      cin >> s >> t;  
       --s;
       --t;
       cout << tree.query(s, t + 1) << endl;
@@ -257,7 +293,7 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "SegTree-delay.cpp"
+#line 1 "DataStructure/SegTree-delay.cpp"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -267,6 +303,8 @@ using namespace std;
 using ll = long long;
 
 // ----- SegTree -----
+// This source code can be compiled only by C++17 or upper version. C++14 or lower is not allowed.
+// Referring to https://beet-aizu.github.io/library/library/segtree/basic/chien.cpp.html
 
 template <typename T, typename U>
 class SegTree
@@ -373,7 +411,7 @@ private:
 
   inline void propagate_down(int k)
   {
-    for (auto i = height; i >= 0; i--)
+    for (auto i = height; i; i--)
     {
       propagate(k >> i);
     }
@@ -390,12 +428,32 @@ private:
 
 class RMQ_RUQ : public SegTree<ll, ll>
 {
+  /*
   constexpr static auto update_T{[](auto a, auto b) { return min(a, b); }};
   constexpr static auto update_U{[](auto a, auto b) { return b; }};
+  */
   constexpr static ll INFTY{2147483647LL};
 
 public:
+  /*
   RMQ_RUQ(int N) : SegTree<ll, ll>{N, update_T, update_U, update_U, INFTY, INFTY} {};
+  */
+  RMQ_RUQ(int N) : SegTree<ll, ll>{N, [](auto a, auto b) { return min(a, b); }, [](auto a, auto b) { return b; }, [](auto a, auto b) { return b; }, INFTY, INFTY} {};
+};
+
+class RMQ_RAQ : public SegTree<ll, ll>
+{
+  /*
+  constexpr static auto update_T{[](auto a, auto b) { return min(a, b); }};
+  constexpr static auto update_U{[](auto a, auto b) { return a + b; }};
+  */
+  constexpr static ll INFTY{2147483647LL};
+
+public:
+  /*
+  RMQ_RAQ(int N) : SegTree<ll, ll>{N, update_T, update_U, update_U, INFTY, 0} {};
+  */
+  RMQ_RAQ(int N) : SegTree<ll, ll>{N, [](auto a, auto b) { return min(a, b); }, [](auto a, auto b) { return a + b; }, [](auto a, auto b) { return a + b; }, INFTY, 0} {};
 };
 
 class RSQ_RAQ : public SegTree<tuple<ll, ll>, ll>
@@ -407,6 +465,20 @@ class RSQ_RAQ : public SegTree<tuple<ll, ll>, ll>
 
 public:
   RSQ_RAQ(int N) : SegTree<tuple<ll, ll>, ll>{N, update_T, merge, update_U, Pair(0, 0), 0, Pair(0, 1)} {};
+
+  ll query(int a, int b) { return get<0>(SegTree<tuple<ll, ll>, ll>::query(a, b)); }
+};
+
+class RSQ_RUQ : public SegTree<tuple<ll, ll>, ll>
+{
+  using Pair = tuple<ll, ll>;
+  constexpr static auto update_T{[](Pair a, Pair b) { return Pair(get<0>(a) + get<0>(b), get<1>(a) + get<1>(b)); }};
+  constexpr static auto merge{[](Pair a, auto b) { return Pair(get<0>(a) + b * get<1>(a), get<1>(a)); }};
+  constexpr static auto update_U{[](auto a, auto b) { return b; }};
+  constexpr static ll INFTY{2147483647LL};
+
+public:
+  RSQ_RUQ(int N) : SegTree<tuple<ll, ll>, ll>{N, update_T, merge, update_U, Pair(0, 0), -INFTY, Pair(0, 1)} {};
 
   ll query(int a, int b) { return get<0>(SegTree<tuple<ll, ll>, ll>::query(a, b)); }
 };
@@ -460,7 +532,7 @@ int main()
     if (c == 1)
     {
       int s, t;
-      cin >> s >> t;
+      cin >> s >> t;  
       --s;
       --t;
       cout << tree.query(s, t + 1) << endl;
@@ -471,5 +543,5 @@ int main()
 ```
 {% endraw %}
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 

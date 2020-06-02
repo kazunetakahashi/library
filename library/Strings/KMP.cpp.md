@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: KMP.cpp
+# :warning: Strings/KMP.cpp
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 
-* category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
-* <a href="{{ site.github.repository_url }}/blob/master/KMP.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-11 03:07:30+09:00
+* category: <a href="../../index.html#89be9433646f5939040a78971a5d103a">Strings</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Strings/KMP.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-06-02 17:08:46+09:00
 
 
 
@@ -72,11 +72,11 @@ public:
 
   int operator[](int i) { return A[i]; }
 
-  vector<int> find_all(Type const &T)
+  vector<int> place(Type const &T)
   {
     vector<int> res;
     int j{0};
-    for (auto i = 0; i < static_cast<int>(T.size()); i++)
+    for (auto i = size_t{0}; i < T.size(); i++)
     {
       while (j != -1 && S[j] != T[i])
       {
@@ -91,6 +91,16 @@ public:
     }
     return res;
   }
+
+  vector<bool> table(Type const &T)
+  {
+    vector<bool> res(T.size(), false);
+    for (auto e : place(T))
+    {
+      res[e] = true;
+    }
+    return res;
+  }
 };
 
 ```
@@ -99,7 +109,7 @@ public:
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "KMP.cpp"
+#line 1 "Strings/KMP.cpp"
 #include <vector>
 #include <string>
 using namespace std;
@@ -131,11 +141,11 @@ public:
 
   int operator[](int i) { return A[i]; }
 
-  vector<int> find_all(Type const &T)
+  vector<int> place(Type const &T)
   {
     vector<int> res;
     int j{0};
-    for (auto i = 0; i < static_cast<int>(T.size()); i++)
+    for (auto i = size_t{0}; i < T.size(); i++)
     {
       while (j != -1 && S[j] != T[i])
       {
@@ -150,10 +160,20 @@ public:
     }
     return res;
   }
+
+  vector<bool> table(Type const &T)
+  {
+    vector<bool> res(T.size(), false);
+    for (auto e : place(T))
+    {
+      res[e] = true;
+    }
+    return res;
+  }
 };
 
 ```
 {% endraw %}
 
-<a href="../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 
