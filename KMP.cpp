@@ -29,11 +29,11 @@ public:
 
   int operator[](int i) { return A[i]; }
 
-  vector<int> find_all(Type const &T)
+  vector<int> place(Type const &T)
   {
     vector<int> res;
     int j{0};
-    for (auto i = 0; i < static_cast<int>(T.size()); i++)
+    for (auto i = size_t{0}; i < T.size(); i++)
     {
       while (j != -1 && S[j] != T[i])
       {
@@ -45,6 +45,16 @@ public:
         res.push_back(i - j + 1);
         j = A[j];
       }
+    }
+    return res;
+  }
+
+  vector<bool> table(Type const &T)
+  {
+    vector<bool> res(T.size(), false);
+    for (auto e : place(T))
+    {
+      res[e] = true;
     }
     return res;
   }
