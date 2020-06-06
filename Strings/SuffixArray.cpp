@@ -22,7 +22,7 @@ public:
     SparseTable() {}
     SparseTable(vector<T> const &V)
     {
-      int N{static_cast<int>(V.size())}, h{0};
+      int N{static_cast<int>(V.size())}, h{1};
       while ((1 << h) < N)
       {
         ++h;
