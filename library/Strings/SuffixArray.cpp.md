@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: Strings/SuffixArray.cpp
+# :heavy_check_mark: Strings/SuffixArray.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#89be9433646f5939040a78971a5d103a">Strings</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/SuffixArray.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-07 03:39:26+09:00
+    - Last commit date: 2020-06-07 04:26:09+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/Strings/tests/SuffixArray_1.test.cpp.html">Strings/tests/SuffixArray_1.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_1.test.cpp.html">Strings/tests/SuffixArray_1.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
 
 
@@ -71,7 +71,7 @@ public:
     SparseTable() {}
     SparseTable(vector<T> const &V)
     {
-      int N{static_cast<int>(V.size())}, h{0};
+      int N{static_cast<int>(V.size())}, h{1};
       while ((1 << h) < N)
       {
         ++h;
@@ -339,7 +339,7 @@ public:
     SparseTable() {}
     SparseTable(vector<T> const &V)
     {
-      int N{static_cast<int>(V.size())}, h{0};
+      int N{static_cast<int>(V.size())}, h{1};
       while ((1 << h) < N)
       {
         ++h;
