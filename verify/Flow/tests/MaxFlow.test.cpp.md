@@ -21,24 +21,25 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Flow/MaxFlow.cpp
+# :heavy_check_mark: Flow/tests/MaxFlow.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f1a76f66cca677c6e628d9ca58a6c8fc">Flow</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Flow/MaxFlow.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0c8dcdb961ec3d05881ca08d3ccef0f9">Flow/tests</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Flow/tests/MaxFlow.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-06-07 03:39:26+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=jp">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=jp</a>
 
 
-## Verified with
+## Depends on
 
-* :heavy_check_mark: <a href="../../verify/Flow/tests/MaxFlow.test.cpp.html">Flow/tests/MaxFlow.test.cpp</a>
+* :heavy_check_mark: <a href="../../../library/Flow/MaxFlow.cpp.html">Flow/MaxFlow.cpp</a>
 
 
 ## Code
@@ -46,80 +47,24 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-using ll = long long;
+#include "../MaxFlow.cpp"
 
-// ----- MaxFlow -----
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=jp"
 
-class MaxFlow
+int main()
 {
-  struct Edge
+  int N, M;
+  cin >> N >> M;
+  MaxFlow flow{N};
+  for (auto i = 0; i < M; i++)
   {
-    int to;
+    int from, to;
     ll cap;
-    int rev;
-  };
-  constexpr static ll INFTY = 10000000000000010LL;
-
-  int N;
-  vector<vector<Edge>> G;
-  vector<bool> used;
-
-public:
-  MaxFlow() {}
-  MaxFlow(int N) : N{N}
-  {
-    G.resize(N);
-    used.resize(N);
+    cin >> from >> to >> cap;
+    flow.add_edge(from, to, cap);
   }
-
-  void add_edge(int from, int to, ll cap = 1LL)
-  {
-    G[from].push_back({to, cap, static_cast<int>(G[to].size())});
-    G[to].push_back({from, 0, static_cast<int>(G[from].size() - 1)});
-  }
-
-  ll max_flow(int s, int t)
-  {
-    ll flow = 0;
-    while (true)
-    {
-      fill(used.begin(), used.end(), false);
-      ll f = dfs(s, t, INFTY);
-      if (f == 0)
-      {
-        return flow;
-      }
-      flow += f;
-    }
-  }
-
-private:
-  ll dfs(int v, int t, ll f)
-  {
-    if (v == t)
-    {
-      return f;
-    }
-    used[v] = true;
-    for (auto &e : G[v])
-    {
-      if (!used[e.to] && e.cap > 0)
-      {
-        ll d = dfs(e.to, t, min(f, e.cap));
-        if (d > 0)
-        {
-          e.cap -= d;
-          G[e.to][e.rev].cap += d;
-          return d;
-        }
-      }
-    }
-    return 0;
-  }
-};
+  cout << flow.max_flow(0, N - 1) << endl;
+}
 
 ```
 {% endraw %}
@@ -202,9 +147,27 @@ private:
     return 0;
   }
 };
+#line 2 "Flow/tests/MaxFlow.test.cpp"
+
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=jp"
+
+int main()
+{
+  int N, M;
+  cin >> N >> M;
+  MaxFlow flow{N};
+  for (auto i = 0; i < M; i++)
+  {
+    int from, to;
+    ll cap;
+    cin >> from >> to >> cap;
+    flow.add_edge(from, to, cap);
+  }
+  cout << flow.max_flow(0, N - 1) << endl;
+}
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
