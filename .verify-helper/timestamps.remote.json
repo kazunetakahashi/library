@@ -2,6 +2,7 @@
 "Flow/tests/Dinic.test.cpp": "2020-06-07 03:39:26 +0900",
 "Flow/tests/MaxFlow.test.cpp": "2020-06-07 03:39:26 +0900",
 "Graph/tests/WarshallFloyd.test.cpp": "2020-06-07 03:27:56 +0900",
-"Strings/tests/SuffixArray_2.test.cpp": "2020-06-07 03:39:26 +0900",
+"Strings/tests/SuffixArray_1.test.cpp": "2020-06-07 04:26:09 +0900",
+"Strings/tests/SuffixArray_2.test.cpp": "2020-06-07 04:26:09 +0900",
 "example.test.cpp": "2020-01-28 17:58:27 +0900"
 }
