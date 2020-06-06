@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a49950aa047c2292e989e368a97a3aae">Math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-02 17:08:46+09:00
+    - Last commit date: 2020-06-04 00:13:06+09:00
 
 
 
@@ -318,7 +318,7 @@ Mat<T> power(Mat<T> const &A, ll N)
   {
     return unit_matrix<T>(A.size());
   }
-  if ((N & 1) == 1)
+  if (N & 1)
   {
     return A * power(A, N - 1);
   }
@@ -610,7 +610,7 @@ Mat<T> power(Mat<T> const &A, ll N)
   {
     return unit_matrix<T>(A.size());
   }
-  if ((N & 1) == 1)
+  if (N & 1)
   {
     return A * power(A, N - 1);
   }
