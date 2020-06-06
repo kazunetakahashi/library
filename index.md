@@ -60,7 +60,7 @@ layout: default
 * :warning: <a href="library/Graph/Bipartite.cpp.html">Graph/Bipartite.cpp</a>
 * :warning: <a href="library/Graph/LCA.cpp.html">Graph/LCA.cpp</a>
 * :warning: <a href="library/Graph/ReadGraph.cpp.html">Graph/ReadGraph.cpp</a>
-* :warning: <a href="library/Graph/WarshallFloyd.cpp.html">Graph/WarshallFloyd.cpp</a>
+* :heavy_check_mark: <a href="library/Graph/WarshallFloyd.cpp.html">Graph/WarshallFloyd.cpp</a>
 
 
 <div id="a49950aa047c2292e989e368a97a3aae"></div>
@@ -111,6 +111,7 @@ layout: default
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/Graph/tests/WarshallFloyd.test.cpp.html">Graph/tests/WarshallFloyd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/example.test.cpp.html">example.test.cpp</a>
 
 
