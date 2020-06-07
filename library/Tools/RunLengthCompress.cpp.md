@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#8625e1de7be14c39b1d14dc03d822497">Tools</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Tools/RunLengthCompress.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-04 00:13:06+09:00
+    - Last commit date: 2020-06-08 00:00:50+09:00
 
 
 
@@ -48,10 +48,11 @@ using namespace std;
 // ----- RunLengthCompress -----
 
 template <typename T>
-auto RunLengthCompress(T const &S) -> vector<tuple<decltype(S[0]), int>>
+auto RunLengthCompress(T const &S) -> vector<tuple<remove_const_t<remove_reference_t<decltype(S[0])>>, int>>
 {
-  vector<tuple<decltype(S[0]), int>> res;
-  auto c{S[0]};
+  using U = remove_const_t<remove_reference_t<decltype(S[0])>>;
+  vector<tuple<U, int>> res;
+  U c{S[0]};
   int x{0};
   for (auto e : S)
   {
@@ -84,10 +85,11 @@ using namespace std;
 // ----- RunLengthCompress -----
 
 template <typename T>
-auto RunLengthCompress(T const &S) -> vector<tuple<decltype(S[0]), int>>
+auto RunLengthCompress(T const &S) -> vector<tuple<remove_const_t<remove_reference_t<decltype(S[0])>>, int>>
 {
-  vector<tuple<decltype(S[0]), int>> res;
-  auto c{S[0]};
+  using U = remove_const_t<remove_reference_t<decltype(S[0])>>;
+  vector<tuple<U, int>> res;
+  U c{S[0]};
   int x{0};
   for (auto e : S)
   {
