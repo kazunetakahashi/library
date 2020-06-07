@@ -5,10 +5,11 @@ using namespace std;
 // ----- RunLengthCompress -----
 
 template <typename T>
-auto RunLengthCompress(T const &S) -> vector<tuple<decltype(S[0]), int>>
+auto RunLengthCompress(T const &S) -> vector<tuple<remove_const_t<remove_reference_t<decltype(S[0])>>, int>>
 {
-  vector<tuple<decltype(S[0]), int>> res;
-  auto c{S[0]};
+  using U = remove_const_t<remove_reference_t<decltype(S[0])>>;
+  vector<tuple<U, int>> res;
+  U c{S[0]};
   int x{0};
   for (auto e : S)
   {
