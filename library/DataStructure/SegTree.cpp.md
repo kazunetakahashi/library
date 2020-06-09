@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegTree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-09 22:18:48+09:00
+    - Last commit date: 2020-06-09 22:27:16+09:00
 
 
 
@@ -40,6 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RMQ_RAQ.test.cpp.html">DataStructure/tests/RMQ_RAQ.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/DataStructure/tests/RSQ_RUQ.test.cpp.html">DataStructure/tests/RSQ_RUQ.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RSU_RAU.test.cpp.html">DataStructure/tests/RSU_RAU.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeMinimumQuery.test.cpp.html">DataStructure/tests/RangeMinimumQuery.test.cpp</a>
@@ -289,13 +290,13 @@ SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &ring_zero, Mon
       },
       [](Monoid x, Monoid y) { return min(x, y); },
       [](Action &x, Action y) {
-        if (!get<1>(y))
+        if (get<1>(y))
         {
-          x = y;
+          get<0>(x) += get<0>(y);
         }
         else
         {
-          get<0>(x) += get<0>(y);
+          x = y;
         }
       },
       [](Action x, int) { return x; }}};
@@ -307,6 +308,29 @@ template <typename Monoid>
 SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N)
 {
   return RMQ_RAQ<Monoid>(N, 0, numeric_limits<Monoid>::max());
+}
+
+// ----- RSQ_RUQ -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja
+//  - update(s, t, x) : a[i] = x; for all i \in [s, t),
+//  - query(s, t) : return the sum of a[i] where i runs on [s, t).
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RSQ_RUQ(int N, Monoid const &monoid_zero)
+{
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{
+      N, monoid_zero, monoid_zero,
+      [](Monoid &x, Action y) { x = y; },
+      [](Monoid x, Monoid y) { return x + y; },
+      [](Action &x, Action y) { return x = y; },
+      [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RSQ_RUQ(int N)
+{
+  return RSQ_RUQ<Monoid>(N, 0);
 }
 
 ```
@@ -553,13 +577,13 @@ SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &ring_zero, Mon
       },
       [](Monoid x, Monoid y) { return min(x, y); },
       [](Action &x, Action y) {
-        if (!get<1>(y))
+        if (get<1>(y))
         {
-          x = y;
+          get<0>(x) += get<0>(y);
         }
         else
         {
-          get<0>(x) += get<0>(y);
+          x = y;
         }
       },
       [](Action x, int) { return x; }}};
@@ -571,6 +595,29 @@ template <typename Monoid>
 SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N)
 {
   return RMQ_RAQ<Monoid>(N, 0, numeric_limits<Monoid>::max());
+}
+
+// ----- RSQ_RUQ -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja
+//  - update(s, t, x) : a[i] = x; for all i \in [s, t),
+//  - query(s, t) : return the sum of a[i] where i runs on [s, t).
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RSQ_RUQ(int N, Monoid const &monoid_zero)
+{
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{
+      N, monoid_zero, monoid_zero,
+      [](Monoid &x, Action y) { x = y; },
+      [](Monoid x, Monoid y) { return x + y; },
+      [](Action &x, Action y) { return x = y; },
+      [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RSQ_RUQ(int N)
+{
+  return RSQ_RUQ<Monoid>(N, 0);
 }
 
 ```

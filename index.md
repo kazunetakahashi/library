@@ -114,6 +114,7 @@ layout: default
 
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RAQ.test.cpp.html">DataStructure/tests/RMQ_RAQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RSQ_RUQ.test.cpp.html">DataStructure/tests/RSQ_RUQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RSU_RAU.test.cpp.html">DataStructure/tests/RSU_RAU.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RangeMinimumQuery.test.cpp.html">DataStructure/tests/RangeMinimumQuery.test.cpp</a>

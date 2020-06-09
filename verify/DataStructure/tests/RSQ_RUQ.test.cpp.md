@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DataStructure/tests/RSU_RAU.test.cpp
+# :heavy_check_mark: DataStructure/tests/RSQ_RUQ.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RSU_RAU.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RSQ_RUQ.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-06-09 22:27:16+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja</a>
 
 
 ## Depends on
@@ -49,13 +49,13 @@ layout: default
 ```cpp
 #include "../SegTree.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangePlusQuery<ll>(N)};
+  auto tree{RSQ_RUQ<ll>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -64,18 +64,15 @@ int main()
     cin >> t;
     if (t == 0)
     {
-      int s, t, x;
+      int s, t;
+      ll x;
       cin >> s >> t >> x;
-      --s;
-      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
       int s, t;
       cin >> s >> t;
-      --s;
-      --t;
       cout << tree.query(s, t + 1) << endl;
     }
   }
@@ -367,15 +364,15 @@ SegTree<Monoid, Monoid> RSQ_RUQ(int N)
 {
   return RSQ_RUQ<Monoid>(N, 0);
 }
-#line 2 "DataStructure/tests/RSU_RAU.test.cpp"
+#line 2 "DataStructure/tests/RSQ_RUQ.test.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangePlusQuery<ll>(N)};
+  auto tree{RSQ_RUQ<ll>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -384,18 +381,15 @@ int main()
     cin >> t;
     if (t == 0)
     {
-      int s, t, x;
+      int s, t;
+      ll x;
       cin >> s >> t >> x;
-      --s;
-      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
       int s, t;
       cin >> s >> t;
-      --s;
-      --t;
       cout << tree.query(s, t + 1) << endl;
     }
   }
