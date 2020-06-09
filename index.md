@@ -39,8 +39,7 @@ layout: default
 ### DataStructure
 
 * :warning: <a href="library/DataStructure/RangeAddQuery.cpp.html">DataStructure/RangeAddQuery.cpp</a>
-* :warning: <a href="library/DataStructure/SegTree-delay.cpp.html">DataStructure/SegTree-delay.cpp</a>
-* :warning: <a href="library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
 * :warning: <a href="library/DataStructure/UnionFind.cpp.html">DataStructure/UnionFind.cpp</a>
 
 
@@ -104,6 +103,8 @@ layout: default
 
 ### old
 
+* :warning: <a href="library/old/SegTree-delay.cpp.html">old/SegTree-delay.cpp</a>
+* :warning: <a href="library/old/SegTree.cpp.html">old/SegTree.cpp</a>
 * :warning: <a href="library/old/fast_fourier_transform.cpp.html">old/fast_fourier_transform.cpp</a>
 * :warning: <a href="library/old/kansetsu.cpp.html">old/kansetsu.cpp</a>
 * :warning: <a href="library/old/under_count.cpp.html">old/under_count.cpp</a>
@@ -111,6 +112,7 @@ layout: default
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RangeUpdateQuery.test.cpp.html">DataStructure/tests/RangeUpdateQuery.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/Dinic.test.cpp.html">Flow/tests/Dinic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/MaxFlow.test.cpp.html">Flow/tests/MaxFlow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Graph/tests/WarshallFloyd.test.cpp.html">Graph/tests/WarshallFloyd.test.cpp</a>

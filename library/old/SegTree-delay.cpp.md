@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: DataStructure/SegTree-delay.cpp
+# :warning: old/SegTree-delay.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegTree-delay.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-02 17:08:46+09:00
+* category: <a href="../../index.html#149603e6c03516362a8da23f624db945">old</a>
+* <a href="{{ site.github.repository_url }}/blob/master/old/SegTree-delay.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-06-09 20:11:41+09:00
 
 
 
@@ -293,7 +293,7 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "DataStructure/SegTree-delay.cpp"
+#line 1 "old/SegTree-delay.cpp"
 #include <iostream>
 #include <algorithm>
 #include <vector>
