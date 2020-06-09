@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegTree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-09 20:58:12+09:00
+    - Last commit date: 2020-06-09 21:17:25+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/DataStructure/tests/RSU_RAU.test.cpp.html">DataStructure/tests/RSU_RAU.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeMinimumQuery.test.cpp.html">DataStructure/tests/RangeMinimumQuery.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeSumQuery.test.cpp.html">DataStructure/tests/RangeSumQuery.test.cpp</a>
@@ -54,6 +55,7 @@ layout: default
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <utility>
 #include <vector>
 using namespace std;
 using ll = long long;
@@ -199,16 +201,22 @@ private:
 //  - update(s, t, x) : a[i] += x; for all i \in [s, t),
 //  - query(i) : return a[i].
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangePlusQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+// ----- RSU_RAU -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangePlusQuery(int N, Monoid const &monoid_zero)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{N, monoid_zero, monoid_zero, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
 }
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangePlusQuery(int N)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangePlusQuery(int N)
 {
-  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+  return RangePlusQuery<Monoid>(N, 0);
 }
 
 // ----- RangeMinQuery -----
@@ -232,16 +240,17 @@ SegTree<Monoid, Action> RangePlusQuery(int N)
 //  - update(s, t, x) : a[i] = x; for all i \in [s, t),
 //  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeMinQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangeMinQuery(int N, Monoid const &monoid_infty)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{N, monoid_infty, monoid_infty, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
 }
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeMinQuery(int N)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangeMinQuery(int N)
 {
-  return RangeMinQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
+  return RangeMinQuery<Monoid>(N, numeric_limits<Monoid>::max());
 }
 
 ```
@@ -255,6 +264,7 @@ SegTree<Monoid, Action> RangeMinQuery(int N)
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <utility>
 #include <vector>
 using namespace std;
 using ll = long long;
@@ -400,16 +410,22 @@ private:
 //  - update(s, t, x) : a[i] += x; for all i \in [s, t),
 //  - query(i) : return a[i].
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangePlusQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+// ----- RSU_RAU -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangePlusQuery(int N, Monoid const &monoid_zero)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{N, monoid_zero, monoid_zero, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
 }
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangePlusQuery(int N)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangePlusQuery(int N)
 {
-  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+  return RangePlusQuery<Monoid>(N, 0);
 }
 
 // ----- RangeMinQuery -----
@@ -433,16 +449,17 @@ SegTree<Monoid, Action> RangePlusQuery(int N)
 //  - update(s, t, x) : a[i] = x; for all i \in [s, t),
 //  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeMinQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangeMinQuery(int N, Monoid const &monoid_infty)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
+  using Action = Monoid;
+  return SegTree<Monoid, Action>{N, monoid_infty, monoid_infty, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
 }
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeMinQuery(int N)
+template <typename Monoid>
+SegTree<Monoid, Monoid> RangeMinQuery(int N)
 {
-  return RangeMinQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
+  return RangeMinQuery<Monoid>(N, numeric_limits<Monoid>::max());
 }
 
 ```
