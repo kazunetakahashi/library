@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegTree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-09 20:21:15+09:00
+    - Last commit date: 2020-06-09 20:36:38+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/DataStructure/tests/RangeSumQuery.test.cpp.html">DataStructure/tests/RangeSumQuery.test.cpp</a>
 * :x: <a href="../../verify/DataStructure/tests/RangeUpdateQuery.test.cpp.html">DataStructure/tests/RangeUpdateQuery.test.cpp</a>
 
 
@@ -180,9 +181,45 @@ private:
   }
 };
 
+// ----- RangePlusQuery -----
+// This includes RangeSumQuery and RangeAddQuery.
+//  - update(i, x) : a[i] += x;,
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(i) : return a[i];,
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangePlusQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangePlusQuery(int N)
+{
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+}
+
+// ----- RangeSumQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja
+//  - update(i, x) : a[i] += x;,
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeSumQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeSumQuery(int N)
+{
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+}
+
 // ----- RangeUpdateQuery -----
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja
-//  - update(s, t, u) : change a[i] into x for all i \in [s, t),
+//  - update(s, t, x) : change a[i] into x for all i \in [s, t),
 //  - query(i) : return a[i].
 
 template <typename Monoid, typename Action>
@@ -199,19 +236,19 @@ SegTree<Monoid, Action> RangeUpdateQuery(int N)
 
 // ----- RangeAddQuery -----
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
-//  - update(s, t, u) : a[i] += x; for all i \in [s, t),
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
 //  - query(i) : return a[i].
 
 template <typename Monoid, typename Action>
 SegTree<Monoid, Action> RangeAddQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
 }
 
 template <typename Monoid, typename Action>
 SegTree<Monoid, Action> RangeAddQuery(int N)
 {
-  return RangeAddQuery<Monoid, Action>(N, 0, 0);
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
 }
 
 ```
@@ -354,9 +391,45 @@ private:
   }
 };
 
+// ----- RangePlusQuery -----
+// This includes RangeSumQuery and RangeAddQuery.
+//  - update(i, x) : a[i] += x;,
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(i) : return a[i];,
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangePlusQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangePlusQuery(int N)
+{
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+}
+
+// ----- RangeSumQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja
+//  - update(i, x) : a[i] += x;,
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeSumQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeSumQuery(int N)
+{
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+}
+
 // ----- RangeUpdateQuery -----
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja
-//  - update(s, t, u) : change a[i] into x for all i \in [s, t),
+//  - update(s, t, x) : change a[i] into x for all i \in [s, t),
 //  - query(i) : return a[i].
 
 template <typename Monoid, typename Action>
@@ -373,19 +446,19 @@ SegTree<Monoid, Action> RangeUpdateQuery(int N)
 
 // ----- RangeAddQuery -----
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
-//  - update(s, t, u) : a[i] += x; for all i \in [s, t),
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
 //  - query(i) : return a[i].
 
 template <typename Monoid, typename Action>
 SegTree<Monoid, Action> RangeAddQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
 }
 
 template <typename Monoid, typename Action>
 SegTree<Monoid, Action> RangeAddQuery(int N)
 {
-  return RangeAddQuery<Monoid, Action>(N, 0, 0);
+  return RangePlusQuery<Monoid, Action>(N, 0, 0);
 }
 
 ```

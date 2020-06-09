@@ -113,6 +113,7 @@ layout: default
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RangeSumQuery.test.cpp.html">DataStructure/tests/RangeSumQuery.test.cpp</a>
 * :x: <a href="verify/DataStructure/tests/RangeUpdateQuery.test.cpp.html">DataStructure/tests/RangeUpdateQuery.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/Dinic.test.cpp.html">Flow/tests/Dinic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/MaxFlow.test.cpp.html">Flow/tests/MaxFlow.test.cpp</a>
