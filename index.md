@@ -39,7 +39,7 @@ layout: default
 ### DataStructure
 
 * :warning: <a href="library/DataStructure/RangeAddQuery.cpp.html">DataStructure/RangeAddQuery.cpp</a>
-* :question: <a href="library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
 * :warning: <a href="library/DataStructure/UnionFind.cpp.html">DataStructure/UnionFind.cpp</a>
 
 
@@ -112,9 +112,11 @@ layout: default
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RangeAddQuery.test.cpp.html">DataStructure/tests/RangeAddQuery.test.cpp</a>
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RangeMinimumQuery.test.cpp.html">DataStructure/tests/RangeMinimumQuery.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RangeSumQuery.test.cpp.html">DataStructure/tests/RangeSumQuery.test.cpp</a>
-* :x: <a href="verify/DataStructure/tests/RangeUpdateQuery.test.cpp.html">DataStructure/tests/RangeUpdateQuery.test.cpp</a>
+* :heavy_check_mark: <a href="verify/DataStructure/tests/RangeUpdateQuery.test.cpp.html">DataStructure/tests/RangeUpdateQuery.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/Dinic.test.cpp.html">Flow/tests/Dinic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Flow/tests/MaxFlow.test.cpp.html">Flow/tests/MaxFlow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Graph/tests/WarshallFloyd.test.cpp.html">Graph/tests/WarshallFloyd.test.cpp</a>

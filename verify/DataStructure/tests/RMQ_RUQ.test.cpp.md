@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DataStructure/tests/RangeAddQuery.test.cpp
+# :heavy_check_mark: DataStructure/tests/RMQ_RUQ.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RangeAddQuery.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RMQ_RUQ.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-06-09 20:58:12+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja</a>
 
 
 ## Depends on
@@ -49,13 +49,13 @@ layout: default
 ```cpp
 #include "../SegTree.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangePlusQuery<int, int>(N)};
+  auto tree{RangeMinQuery<int, int>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -66,16 +66,13 @@ int main()
     {
       int s, t, x;
       cin >> s >> t >> x;
-      --s;
-      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
-      int k;
-      cin >> k;
-      --k;
-      cout << tree[k] << endl;
+      int s, t;
+      cin >> s >> t;
+      cout << tree.query(s, t + 1) << endl;
     }
   }
 }
@@ -280,15 +277,15 @@ SegTree<Monoid, Action> RangeMinQuery(int N)
 {
   return RangeMinQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
 }
-#line 2 "DataStructure/tests/RangeAddQuery.test.cpp"
+#line 2 "DataStructure/tests/RMQ_RUQ.test.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangePlusQuery<int, int>(N)};
+  auto tree{RangeMinQuery<int, int>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -299,16 +296,13 @@ int main()
     {
       int s, t, x;
       cin >> s >> t >> x;
-      --s;
-      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
-      int k;
-      cin >> k;
-      --k;
-      cout << tree[k] << endl;
+      int s, t;
+      cin >> s >> t;
+      cout << tree.query(s, t + 1) << endl;
     }
   }
 }
