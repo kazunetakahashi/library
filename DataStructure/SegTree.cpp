@@ -157,7 +157,12 @@ template <typename Monoid>
 SegTree<Monoid, Monoid> RangePlusQuery(int N, Monoid const &monoid_zero)
 {
   using Action = Monoid;
-  return SegTree<Monoid, Action>{N, monoid_zero, monoid_zero, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+  return SegTree<Monoid, Action>{
+      N, monoid_zero, monoid_zero,
+      [](Monoid &x, Action y) { x += y; },
+      [](Monoid x, Monoid y) { return x + y; },
+      [](Action &x, Action y) { return x += y; },
+      [](Action x, int y) { return x * y; }};
 }
 
 template <typename Monoid>
@@ -191,11 +196,61 @@ template <typename Monoid>
 SegTree<Monoid, Monoid> RangeMinQuery(int N, Monoid const &monoid_infty)
 {
   using Action = Monoid;
-  return SegTree<Monoid, Action>{N, monoid_infty, monoid_infty, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
+  return SegTree<Monoid, Action>{
+      N, monoid_infty, monoid_infty,
+      [](Monoid &x, Action y) { x = y; },
+      [](Monoid x, Monoid y) { return min(x, y); },
+      [](Action &x, Action y) { return x = y; },
+      [](Action x, int) { return x; }};
 }
 
 template <typename Monoid>
 SegTree<Monoid, Monoid> RangeMinQuery(int N)
 {
   return RangeMinQuery<Monoid>(N, numeric_limits<Monoid>::max());
+}
+
+// ----- RMQ_RAQ -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
+// update should be called as follows.
+// tree.update(s, t, make_tuple(x, true));
+
+template <typename Monoid>
+SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &ring_zero, Monoid const &ring_infty)
+{
+  using Action = tuple<Monoid, bool>;
+  auto tree{SegTree<Monoid, Action>{
+      N, ring_infty, Action{ring_zero, true},
+      [](Monoid &x, Action y) {
+        if (get<1>(y))
+        {
+          x += get<0>(y);
+        }
+        else
+        {
+          x = get<0>(y);
+        }
+      },
+      [](Monoid x, Monoid y) { return min(x, y); },
+      [](Action &x, Action y) {
+        if (!get<1>(y))
+        {
+          x = y;
+        }
+        else
+        {
+          get<0>(x) += get<0>(y);
+        }
+      },
+      [](Action x, int) { return x; }}};
+  tree.update(0, N, Action{ring_zero, false});
+  return tree;
+}
+
+template <typename Monoid>
+SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N)
+{
+  return RMQ_RAQ<Monoid>(N, 0, numeric_limits<Monoid>::max());
 }
