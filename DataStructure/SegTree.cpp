@@ -162,7 +162,7 @@ SegTree<Monoid, Monoid> RangePlusQuery(int N, Monoid const &monoid_zero)
       [](Monoid &x, Action y) { x += y; },
       [](Monoid x, Monoid y) { return x + y; },
       [](Action &x, Action y) { return x += y; },
-      [](Action x, int y) { return x * y; }};
+      [](Action x, int y) { return x * static_cast<Action>(y); }};
 }
 
 template <typename Monoid>
@@ -269,7 +269,7 @@ SegTree<Monoid, Monoid> RSQ_RUQ(int N, Monoid const &monoid_zero)
       [](Monoid &x, Action y) { x = y; },
       [](Monoid x, Monoid y) { return x + y; },
       [](Action &x, Action y) { return x = y; },
-      [](Action x, int y) { return x * y; }};
+      [](Action x, int y) { return x * static_cast<Action>(y); }};
 }
 
 template <typename Monoid>
