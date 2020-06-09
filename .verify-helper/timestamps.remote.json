@@ -1,6 +1,9 @@
 {
-"DataStructure/tests/RangeAddQuery.test.cpp": "2020-06-09 20:36:38 +0900",
-"DataStructure/tests/RangeSumQuery.test.cpp": "2020-06-09 20:36:38 +0900",
+"DataStructure/tests/RMQ_RUQ.test.cpp": "2020-06-09 20:58:12 +0900",
+"DataStructure/tests/RangeAddQuery.test.cpp": "2020-06-09 20:58:12 +0900",
+"DataStructure/tests/RangeMinimumQuery.test.cpp": "2020-06-09 20:58:12 +0900",
+"DataStructure/tests/RangeSumQuery.test.cpp": "2020-06-09 20:58:12 +0900",
+"DataStructure/tests/RangeUpdateQuery.test.cpp": "2020-06-09 20:58:12 +0900",
 "Flow/tests/Dinic.test.cpp": "2020-06-07 03:39:26 +0900",
 "Flow/tests/MaxFlow.test.cpp": "2020-06-07 03:39:26 +0900",
 "Graph/tests/WarshallFloyd.test.cpp": "2020-06-07 03:27:56 +0900",
