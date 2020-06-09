@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DataStructure/tests/RMQ_RUQ.test.cpp
+# :heavy_check_mark: DataStructure/tests/RMQ_RAQ.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RMQ_RUQ.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RMQ_RAQ.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-06-09 22:18:48+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja</a>
 
 
 ## Depends on
@@ -49,13 +49,13 @@ layout: default
 ```cpp
 #include "../SegTree.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangeMinQuery<int>(N)};
+  auto tree{RMQ_RAQ<ll>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -64,9 +64,10 @@ int main()
     cin >> t;
     if (t == 0)
     {
-      int s, t, x;
+      int s, t;
+      ll x;
       cin >> s >> t >> x;
-      tree.update(s, t + 1, x);
+      tree.update(s, t + 1, make_tuple(x, true));
     }
     else
     {
@@ -340,15 +341,15 @@ SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N)
 {
   return RMQ_RAQ<Monoid>(N, 0, numeric_limits<Monoid>::max());
 }
-#line 2 "DataStructure/tests/RMQ_RUQ.test.cpp"
+#line 2 "DataStructure/tests/RMQ_RAQ.test.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangeMinQuery<int>(N)};
+  auto tree{RMQ_RAQ<ll>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -357,9 +358,10 @@ int main()
     cin >> t;
     if (t == 0)
     {
-      int s, t, x;
+      int s, t;
+      ll x;
       cin >> s >> t >> x;
-      tree.update(s, t + 1, x);
+      tree.update(s, t + 1, make_tuple(x, true));
     }
     else
     {
