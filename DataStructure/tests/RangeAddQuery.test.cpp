@@ -1,12 +1,12 @@
 #include "../SegTree.cpp"
 
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja"
 
 int main()
 {
   int N;
   cin >> N;
-  auto tree{RangeUpdateQuery<int, int>(N)};
+  auto tree{RangeAddQuery<int, int>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)

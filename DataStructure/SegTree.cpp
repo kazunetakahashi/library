@@ -147,3 +147,20 @@ SegTree<Monoid, Action> RangeUpdateQuery(int N)
 {
   return RangeUpdateQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
 }
+
+// ----- RangeAddQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+//  - update(s, t, u) : a[i] += x; for all i \in [s, t),
+//  - query(i) : return a[i].
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeAddQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeAddQuery(int N)
+{
+  return RangeAddQuery<Monoid, Action>(N, 0, 0);
+}
