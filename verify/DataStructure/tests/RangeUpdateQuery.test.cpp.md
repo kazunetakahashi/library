@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DataStructure/tests/RangeUpdateQuery.test.cpp
+# :x: DataStructure/tests/RangeUpdateQuery.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RangeUpdateQuery.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-09 20:11:41+09:00
+    - Last commit date: 2020-06-09 20:21:15+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
+* :question: <a href="../../../library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
 
 
 ## Code
@@ -66,12 +66,15 @@ int main()
     {
       int s, t, x;
       cin >> s >> t >> x;
+      --s;
+      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
       int k;
       cin >> k;
+      --k;
       cout << tree[k] << endl;
     }
   }
@@ -233,6 +236,23 @@ SegTree<Monoid, Action> RangeUpdateQuery(int N)
 {
   return RangeUpdateQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
 }
+
+// ----- RangeAddQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+//  - update(s, t, u) : a[i] += x; for all i \in [s, t),
+//  - query(i) : return a[i].
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeAddQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+{
+  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x += y; }, [](Monoid x, Monoid y) { return x + y; }, [](Action &x, Action y) { return x += y; }, [](Action x, int y) { return x * y; }};
+}
+
+template <typename Monoid, typename Action>
+SegTree<Monoid, Action> RangeAddQuery(int N)
+{
+  return RangeAddQuery<Monoid, Action>(N, 0, 0);
+}
 #line 2 "DataStructure/tests/RangeUpdateQuery.test.cpp"
 
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja"
@@ -252,12 +272,15 @@ int main()
     {
       int s, t, x;
       cin >> s >> t >> x;
+      --s;
+      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
       int k;
       cin >> k;
+      --k;
       cout << tree[k] << endl;
     }
   }
