@@ -6,7 +6,7 @@ int main()
 {
   int N;
   cin >> N;
-  auto tree{RangeMinQuery<int, int>(N)};
+  auto tree{RangeMinQuery<int>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
