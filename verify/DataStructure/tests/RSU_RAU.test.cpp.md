@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RSU_RAU.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-09 22:27:16+09:00
+    - Last commit date: 2020-06-10 00:56:39+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G&lang=ja</a>
@@ -252,7 +252,7 @@ SegTree<Monoid, Monoid> RangePlusQuery(int N, Monoid const &monoid_zero)
       [](Monoid &x, Action y) { x += y; },
       [](Monoid x, Monoid y) { return x + y; },
       [](Action &x, Action y) { return x += y; },
-      [](Action x, int y) { return x * y; }};
+      [](Action x, int y) { return x * static_cast<Action>(y); }};
 }
 
 template <typename Monoid>
@@ -359,7 +359,7 @@ SegTree<Monoid, Monoid> RSQ_RUQ(int N, Monoid const &monoid_zero)
       [](Monoid &x, Action y) { x = y; },
       [](Monoid x, Monoid y) { return x + y; },
       [](Action &x, Action y) { return x = y; },
-      [](Action x, int y) { return x * y; }};
+      [](Action x, int y) { return x * static_cast<Action>(y); }};
 }
 
 template <typename Monoid>
