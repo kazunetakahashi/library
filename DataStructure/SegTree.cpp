@@ -132,11 +132,20 @@ private:
 };
 
 // ----- RangePlusQuery -----
-// This includes RangeSumQuery and RangeAddQuery.
 //  - update(i, x) : a[i] += x;,
 //  - update(s, t, x) : a[i] += x; for all i \in [s, t),
 //  - query(i) : return a[i];,
 //  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+// ----- RangeSumQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja
+//  - update(i, x) : a[i] += x;,
+//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+
+// ----- RangeAddQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
+//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
+//  - query(i) : return a[i].
 
 template <typename Monoid, typename Action>
 SegTree<Monoid, Action> RangePlusQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
@@ -150,53 +159,35 @@ SegTree<Monoid, Action> RangePlusQuery(int N)
   return RangePlusQuery<Monoid, Action>(N, 0, 0);
 }
 
-// ----- RangeSumQuery -----
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja
-//  - update(i, x) : a[i] += x;,
-//  - query(s, t) : return the sum a[i] where i runs on [s, t).
+// ----- RangeMinQuery -----
+//  - update(i, x) : a[i] = x;,
+//  - update(s, t, x) : a[i] = x; for all i \in [s, t),
+//  - query(i) : return a[i];,
+//  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
 
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeSumQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
-{
-  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
-}
-
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeSumQuery(int N)
-{
-  return RangePlusQuery<Monoid, Action>(N, 0, 0);
-}
+// ----- RangeMinimumQuery -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A&lang=ja
+//  - update(i, x) : a[i] = x;,
+//  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
 
 // ----- RangeUpdateQuery -----
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D&lang=ja
-//  - update(s, t, x) : change a[i] into x for all i \in [s, t),
+//  - update(s, t, x) : a[i] = x; for all i \in [s, t),
 //  - query(i) : return a[i].
 
+// ----- RMQ_RUQ -----
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja
+//  - update(s, t, x) : a[i] = x; for all i \in [s, t),
+//  - query(s, t) : return the minimum of a[i] where i runs on [s, t).
+
 template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeUpdateQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
+SegTree<Monoid, Action> RangeMinQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
 {
-  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int y) { return x; }};
+  return SegTree<Monoid, Action>{N, unity_monoid, unity_action, [](Monoid &x, Monoid y) { x = y; }, [](Monoid x, Monoid y) { return min(x, y); }, [](Action &x, Action y) { return x = y; }, [](Action x, int) { return x; }};
 }
 
 template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeUpdateQuery(int N)
+SegTree<Monoid, Action> RangeMinQuery(int N)
 {
-  return RangeUpdateQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
-}
-
-// ----- RangeAddQuery -----
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E&lang=ja
-//  - update(s, t, x) : a[i] += x; for all i \in [s, t),
-//  - query(i) : return a[i].
-
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeAddQuery(int N, Monoid const &unity_monoid, Action const &unity_action)
-{
-  return RangePlusQuery<Monoid, Action>(N, unity_monoid, unity_action);
-}
-
-template <typename Monoid, typename Action>
-SegTree<Monoid, Action> RangeAddQuery(int N)
-{
-  return RangePlusQuery<Monoid, Action>(N, 0, 0);
+  return RangeMinQuery<Monoid, Action>(N, numeric_limits<Monoid>::max(), numeric_limits<Action>::max());
 }

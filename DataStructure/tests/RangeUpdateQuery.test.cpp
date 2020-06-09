@@ -6,7 +6,7 @@ int main()
 {
   int N;
   cin >> N;
-  auto tree{RangeUpdateQuery<int, int>(N)};
+  auto tree{RangeMinQuery<int, int>(N)};
   int Q;
   cin >> Q;
   for (auto q{0}; q < Q; ++q)
@@ -17,15 +17,12 @@ int main()
     {
       int s, t, x;
       cin >> s >> t >> x;
-      --s;
-      --t;
       tree.update(s, t + 1, x);
     }
     else
     {
       int k;
       cin >> k;
-      --k;
       cout << tree[k] << endl;
     }
   }
