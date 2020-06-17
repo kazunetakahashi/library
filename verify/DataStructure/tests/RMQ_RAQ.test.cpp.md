@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#36efb00cd513f178ec5e3586c0349afa">DataStructure/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/tests/RMQ_RAQ.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-10 00:56:39+09:00
+    - Last commit date: 2020-06-18 07:39:30+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H&lang=ja</a>
@@ -111,8 +111,57 @@ class SegTree
     Monoid value;
     Action lazy_value;
 
+    // constructor
     SegNode() {}
-    SegNode(Monoid value, Action lazy_value) : need_update{false}, left{nullptr}, right{nullptr}, value{value}, lazy_value{lazy_value} {}
+    SegNode(Monoid value, Action lazy_value)
+        : need_update{false},
+          left{nullptr},
+          right{nullptr},
+          value{value},
+          lazy_value{lazy_value} {}
+
+    // copy constructor
+    SegNode(SegNode const &node)
+        : need_update{node.need_update},
+          value{node.value},
+          lazy_value{node.lazy_value}
+    {
+      if (node.left)
+      {
+        left = make_unique<SegNode>(*(node.left));
+      }
+      if (node.right)
+      {
+        left = make_unique<SegNode>(*(node.right));
+      }
+    }
+
+    // copy assignment
+    SegNode &operator=(SegNode const &node)
+    {
+      SegNode tmp{node};
+      swap(tmp, *this);
+      return *this;
+    }
+
+    // move constructor
+    SegNode(SegNode &&node)
+        : need_update{node.need_update},
+          left{move(node.left)},
+          right{move(node.right)},
+          value{node.value},
+          lazy_value{node.lazy_value} {}
+
+    // move assignment
+    SegNode &operator=(SegNode &&node)
+    {
+      swap(need_update, node.need_update);
+      swap(left, node.left);
+      swap(right, node.right);
+      swap(value, node.value);
+      swap(lazy_value, node.lazy_value);
+      return *this;
+    }
   };
 
   using FuncAction = function<void(Monoid &, Action)>;
@@ -133,13 +182,70 @@ class SegTree
   FuncIndex func_accumulate;
 
 public:
+  // constructor
   SegTree() {}
-  SegTree(int n, Monoid unity_monoid, Action unity_action, FuncAction func_update, FuncMonoid func_combine, FuncLazy func_lazy, FuncIndex func_accumulate) : N{1}, root{make_unique<SegNode>(unity_monoid, unity_action)}, unity_monoid(unity_monoid), unity_action(unity_action), func_update(func_update), func_combine(func_combine), func_lazy(func_lazy), func_accumulate(func_accumulate)
+  SegTree(
+      int n, Monoid unity_monoid, Action unity_action,
+      FuncAction func_update,
+      FuncMonoid func_combine,
+      FuncLazy func_lazy,
+      FuncIndex func_accumulate)
+      : N{1}, root{make_unique<SegNode>(unity_monoid, unity_action)},
+        unity_monoid{unity_monoid}, unity_action{unity_action},
+        func_update{func_update},
+        func_combine{func_combine},
+        func_lazy{func_lazy},
+        func_accumulate{func_accumulate}
   {
     while (N < n)
     {
       N <<= 1;
     }
+  }
+
+  // copy constructor
+  SegTree(SegTree const &tree)
+      : N{tree.N}, unity_monoid{tree.unity_monoid}, unity_action{tree.unity_action},
+        func_update{tree.func_update},
+        func_combine{tree.func_combine},
+        func_lazy{tree.func_lazy},
+        func_accumulate{tree.func_accumulate}
+  {
+    if (tree.root)
+    {
+      root = make_unique<SegNode>(*(tree.root));
+    }
+  }
+
+  // copy assignment
+  SegTree &operator=(SegTree const &tree)
+  {
+    SegTree tmp{tree};
+    swap(tmp, *this);
+    return *this;
+  }
+
+  // move constructor
+  SegTree(SegTree &&tree)
+      : N{tree.N}, root{move(tree.root)},
+        unity_monoid(tree.unity_monoid), unity_action(tree.unity_action),
+        func_update{tree.func_update},
+        func_combine{tree.func_combine},
+        func_lazy{tree.func_lazy},
+        func_accumulate{tree.func_accumulate} {}
+
+  // move assignment
+  SegTree &operator=(SegTree &&tree)
+  {
+    swap(N, tree.N);
+    swap(root, tree.root);
+    swap(unity_monoid, tree.unity_monoid);
+    swap(unity_action, tree.unity_action);
+    swap(func_update, tree.func_update);
+    swap(func_combine, tree.func_combine);
+    swap(func_lazy, tree.func_lazy);
+    swap(func_accumulate, tree.func_accumulate);
+    return *this;
   }
 
   void update(int a, int b, Action const &x) { update(root.get(), a, b, x, 0, N); }
@@ -305,11 +411,11 @@ SegTree<Monoid, Monoid> RangeMinQuery(int N)
 // tree.update(s, t, make_tuple(x, true));
 
 template <typename Monoid>
-SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &ring_zero, Monoid const &ring_infty)
+SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &monoid_zero, Monoid const &monoid_infty)
 {
   using Action = tuple<Monoid, bool>;
   auto tree{SegTree<Monoid, Action>{
-      N, ring_infty, Action{ring_zero, true},
+      N, monoid_infty, Action{monoid_zero, true},
       [](Monoid &x, Action y) {
         if (get<1>(y))
         {
@@ -332,7 +438,7 @@ SegTree<Monoid, tuple<Monoid, bool>> RMQ_RAQ(int N, Monoid const &ring_zero, Mon
         }
       },
       [](Action x, int) { return x; }}};
-  tree.update(0, N, Action{ring_zero, false});
+  tree.update(0, N, Action{monoid_zero, false});
   return tree;
 }
 
