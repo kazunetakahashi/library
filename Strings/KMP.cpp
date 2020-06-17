@@ -16,7 +16,7 @@ public:
   MP(Type const &S) : N(S.size()), S{S}, A(N + 1, -1)
   {
     int j{-1};
-    for (auto i = 0; i < N; i++)
+    for (auto i{0}; i < N; i++)
     {
       while (j != -1 && S[j] != S[i])
       {
@@ -33,7 +33,7 @@ public:
   {
     vector<int> res;
     int j{0};
-    for (auto i = size_t{0}; i < T.size(); i++)
+    for (auto i{size_t{0}}; i < T.size(); i++)
     {
       while (j != -1 && S[j] != T[i])
       {
