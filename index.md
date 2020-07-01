@@ -34,6 +34,13 @@ layout: default
 
 ## Library Files
 
+<div id="5b6c359dc823363bb7722835b7b24d01"></div>
+
+### DP-Typical
+
+* :heavy_check_mark: <a href="library/DP-Typical/LIS.cpp.html">DP-Typical/LIS.cpp</a>
+
+
 <div id="5e248f107086635fddcead5bf28943fc"></div>
 
 ### DataStructure
@@ -119,6 +126,7 @@ layout: default
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/DP-Typical/tests/LIS.test.cpp.html">DP-Typical/tests/LIS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RAQ.test.cpp.html">DataStructure/tests/RMQ_RAQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RSQ_RUQ.test.cpp.html">DataStructure/tests/RSQ_RUQ.test.cpp</a>

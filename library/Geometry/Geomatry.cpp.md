@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#d9c6333623e6357515fcbf17be806273">Geometry</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Geometry/Geomatry.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-18 07:38:12+09:00
+    - Last commit date: 2020-07-02 07:52:27+09:00
 
 
 
@@ -152,6 +152,7 @@ struct Segment;
 
 struct Line : public Geom
 {
+  Line() {}
   Line(Point const &p, Point const &q)
   {
     push_back(p);
@@ -163,6 +164,12 @@ struct Line : public Geom
 
 struct Segment : public Line
 {
+  Segment() {}
+  Segment(Point const &p, Point const &q)
+  {
+    push_back(p);
+    push_back(q);
+  }
 };
 
 // ----- Circle -----
@@ -172,6 +179,7 @@ struct Circle
   Point p;
   ld r;
 
+  Circle() {}
   Circle(Point const &p, ld r) : p(p), r(r) {}
 };
 
@@ -303,10 +311,6 @@ ld Dist(Segment const &s, Segment const &t)
 vector<Point> IntersectionPoints(Circle const &a, Circle const &b)
 {
   auto d{Dist(a.p, b.p)};
-  if (a.r + b.r + EPSILON < d)
-  {
-    return {};
-  }
   auto l{(a.r * a.r - b.r * b.r + d * d) / (2 * d)};
   auto tmp{a.r * a.r - l * l};
   if (tmp <= 0)
@@ -512,6 +516,7 @@ struct Segment;
 
 struct Line : public Geom
 {
+  Line() {}
   Line(Point const &p, Point const &q)
   {
     push_back(p);
@@ -523,6 +528,12 @@ struct Line : public Geom
 
 struct Segment : public Line
 {
+  Segment() {}
+  Segment(Point const &p, Point const &q)
+  {
+    push_back(p);
+    push_back(q);
+  }
 };
 
 // ----- Circle -----
@@ -532,6 +543,7 @@ struct Circle
   Point p;
   ld r;
 
+  Circle() {}
   Circle(Point const &p, ld r) : p(p), r(r) {}
 };
 
@@ -663,10 +675,6 @@ ld Dist(Segment const &s, Segment const &t)
 vector<Point> IntersectionPoints(Circle const &a, Circle const &b)
 {
   auto d{Dist(a.p, b.p)};
-  if (a.r + b.r + EPSILON < d)
-  {
-    return {};
-  }
   auto l{(a.r * a.r - b.r * b.r + d * d) / (2 * d)};
   auto tmp{a.r * a.r - l * l};
   if (tmp <= 0)

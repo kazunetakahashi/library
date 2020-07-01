@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#4cdbd2bafa8193091ba09509cedf94fd">Graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/ReadGraph.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-18 07:39:57+09:00
+    - Last commit date: 2020-07-02 07:52:27+09:00
 
 
 
@@ -51,11 +51,10 @@ using namespace std;
 
 struct Edge
 {
-  int src, dst, id;
+  int src, dst, id, rev;
   // ll cost;
   Edge() {}
-  Edge(int src, int dst, int id) : src{src}, dst{dst}, id{id} {}
-  // Edge(int src, int dst, ll cost) : src{src}, dst{dst}, cost{cost} {}
+  Edge(int src, int dst, int id, int rev) : src{src}, dst{dst}, id{id}, rev{rev} {}
 
   void added_edge(vector<vector<Edge>> &V)
   {
@@ -64,21 +63,29 @@ struct Edge
 
   void added_rev(vector<vector<Edge>> &V)
   {
-    V[dst].push_back(rev());
+    V[dst].push_back(rev_edge());
   }
 
-  Edge rev()
+  Edge rev_edge()
   {
     Edge edge{*this};
     swap(edge.src, edge.dst);
+    swap(edge.id, edge.rev);
     return edge;
   }
 };
 
-tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, bool is_undirected = true, bool is_one_indexed = true)
+enum class GraphType
+{
+  Undirected,
+  Directed,
+  RevEdge,
+};
+
+tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
   vector<vector<Edge>> V(N);
-  vector<Edge> E(M);
+  vector<Edge> E;
   for (auto i = 0; i < M; ++i)
   {
     int v, w;
@@ -88,30 +95,52 @@ tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, bool 
       --v;
       --w;
     }
-    Edge edge{v, w, i};
-    edge.added_edge(V);
-    if (is_undirected)
+    switch (type)
     {
+    case GraphType::Undirected:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size())};
+      edge.added_edge(V);
       edge.added_rev(V);
+      E.push_back(edge);
+      break;
     }
-    E.push_back(edge);
+    case GraphType::Directed:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size())};
+      edge.added_edge(V);
+      E.push_back(edge);
+      break;
+    }
+    case GraphType::RevEdge:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size()) + 1};
+      edge.added_edge(V);
+      edge.added_rev(V);
+      E.push_back(edge);
+      E.push_back(edge.rev_edge());
+      break;
+    }
+    default:
+      break;
+    }
   }
   return make_tuple(V, E);
 }
 
-vector<vector<Edge>> ReadGraph(int N, int M, bool is_undirected = true, bool is_one_indexed = true)
+vector<vector<Edge>> ReadGraph(int N, int M, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return get<0>(ReadGraphWithEdges(N, M, is_undirected, is_one_indexed));
+  return get<0>(ReadGraphWithEdges(N, M, type, is_one_indexed));
 }
 
-tuple<vector<vector<Edge>>, vector<Edge>> ReadTreeWithEdges(int N)
+tuple<vector<vector<Edge>>, vector<Edge>> ReadTreeWithEdges(int N, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return ReadGraphWithEdges(N, N - 1);
+  return ReadGraphWithEdges(N, N - 1, type, is_one_indexed);
 }
 
-vector<vector<Edge>> ReadTree(int N)
+vector<vector<Edge>> ReadTree(int N, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return ReadGraph(N, N - 1);
+  return ReadGraph(N, N - 1, type, is_one_indexed);
 }
 
 ```
@@ -131,11 +160,10 @@ using namespace std;
 
 struct Edge
 {
-  int src, dst, id;
+  int src, dst, id, rev;
   // ll cost;
   Edge() {}
-  Edge(int src, int dst, int id) : src{src}, dst{dst}, id{id} {}
-  // Edge(int src, int dst, ll cost) : src{src}, dst{dst}, cost{cost} {}
+  Edge(int src, int dst, int id, int rev) : src{src}, dst{dst}, id{id}, rev{rev} {}
 
   void added_edge(vector<vector<Edge>> &V)
   {
@@ -144,21 +172,29 @@ struct Edge
 
   void added_rev(vector<vector<Edge>> &V)
   {
-    V[dst].push_back(rev());
+    V[dst].push_back(rev_edge());
   }
 
-  Edge rev()
+  Edge rev_edge()
   {
     Edge edge{*this};
     swap(edge.src, edge.dst);
+    swap(edge.id, edge.rev);
     return edge;
   }
 };
 
-tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, bool is_undirected = true, bool is_one_indexed = true)
+enum class GraphType
+{
+  Undirected,
+  Directed,
+  RevEdge,
+};
+
+tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
   vector<vector<Edge>> V(N);
-  vector<Edge> E(M);
+  vector<Edge> E;
   for (auto i = 0; i < M; ++i)
   {
     int v, w;
@@ -168,30 +204,52 @@ tuple<vector<vector<Edge>>, vector<Edge>> ReadGraphWithEdges(int N, int M, bool 
       --v;
       --w;
     }
-    Edge edge{v, w, i};
-    edge.added_edge(V);
-    if (is_undirected)
+    switch (type)
     {
+    case GraphType::Undirected:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size())};
+      edge.added_edge(V);
       edge.added_rev(V);
+      E.push_back(edge);
+      break;
     }
-    E.push_back(edge);
+    case GraphType::Directed:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size())};
+      edge.added_edge(V);
+      E.push_back(edge);
+      break;
+    }
+    case GraphType::RevEdge:
+    {
+      Edge edge{v, w, static_cast<int>(E.size()), static_cast<int>(E.size()) + 1};
+      edge.added_edge(V);
+      edge.added_rev(V);
+      E.push_back(edge);
+      E.push_back(edge.rev_edge());
+      break;
+    }
+    default:
+      break;
+    }
   }
   return make_tuple(V, E);
 }
 
-vector<vector<Edge>> ReadGraph(int N, int M, bool is_undirected = true, bool is_one_indexed = true)
+vector<vector<Edge>> ReadGraph(int N, int M, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return get<0>(ReadGraphWithEdges(N, M, is_undirected, is_one_indexed));
+  return get<0>(ReadGraphWithEdges(N, M, type, is_one_indexed));
 }
 
-tuple<vector<vector<Edge>>, vector<Edge>> ReadTreeWithEdges(int N)
+tuple<vector<vector<Edge>>, vector<Edge>> ReadTreeWithEdges(int N, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return ReadGraphWithEdges(N, N - 1);
+  return ReadGraphWithEdges(N, N - 1, type, is_one_indexed);
 }
 
-vector<vector<Edge>> ReadTree(int N)
+vector<vector<Edge>> ReadTree(int N, GraphType type = GraphType::Undirected, bool is_one_indexed = true)
 {
-  return ReadGraph(N, N - 1);
+  return ReadGraph(N, N - 1, type, is_one_indexed);
 }
 
 ```
