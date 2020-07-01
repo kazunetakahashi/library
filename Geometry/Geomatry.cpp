@@ -109,6 +109,7 @@ struct Segment;
 
 struct Line : public Geom
 {
+  Line() {}
   Line(Point const &p, Point const &q)
   {
     push_back(p);
@@ -120,6 +121,12 @@ struct Line : public Geom
 
 struct Segment : public Line
 {
+  Segment() {}
+  Segment(Point const &p, Point const &q)
+  {
+    push_back(p);
+    push_back(q);
+  }
 };
 
 // ----- Circle -----
@@ -129,6 +136,7 @@ struct Circle
   Point p;
   ld r;
 
+  Circle() {}
   Circle(Point const &p, ld r) : p(p), r(r) {}
 };
 
@@ -260,10 +268,6 @@ ld Dist(Segment const &s, Segment const &t)
 vector<Point> IntersectionPoints(Circle const &a, Circle const &b)
 {
   auto d{Dist(a.p, b.p)};
-  if (a.r + b.r + EPSILON < d)
-  {
-    return {};
-  }
   auto l{(a.r * a.r - b.r * b.r + d * d) / (2 * d)};
   auto tmp{a.r * a.r - l * l};
   if (tmp <= 0)
