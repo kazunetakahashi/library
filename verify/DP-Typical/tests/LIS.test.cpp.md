@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#2c47909818047dac0e0c62e240d8b7f7">DP-Typical/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DP-Typical/tests/LIS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-02 07:52:00+09:00
+    - Last commit date: 2020-07-02 20:09:49+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_1_D&lang=jp">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_1_D&lang=jp</a>
@@ -103,7 +103,7 @@ public:
   LIS() {}
   LIS(int n, T infty = numeric_limits<T>::max()) : n{n}, infty{infty}, dp(n, infty) {}
 
-  T query(T a)
+  int query(T a)
   {
     auto it{lower_bound(dp.begin(), dp.end(), a)};
     auto value{*it};

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5b6c359dc823363bb7722835b7b24d01">DP-Typical</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DP-Typical/LIS.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-02 07:52:00+09:00
+    - Last commit date: 2020-07-02 20:09:49+09:00
 
 
 
@@ -74,7 +74,7 @@ public:
   LIS() {}
   LIS(int n, T infty = numeric_limits<T>::max()) : n{n}, infty{infty}, dp(n, infty) {}
 
-  T query(T a)
+  int query(T a)
   {
     auto it{lower_bound(dp.begin(), dp.end(), a)};
     auto value{*it};
@@ -133,7 +133,7 @@ public:
   LIS() {}
   LIS(int n, T infty = numeric_limits<T>::max()) : n{n}, infty{infty}, dp(n, infty) {}
 
-  T query(T a)
+  int query(T a)
   {
     auto it{lower_bound(dp.begin(), dp.end(), a)};
     auto value{*it};
