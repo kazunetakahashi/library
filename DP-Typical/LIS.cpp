@@ -26,7 +26,7 @@ public:
   LIS() {}
   LIS(int n, T infty = numeric_limits<T>::max()) : n{n}, infty{infty}, dp(n, infty) {}
 
-  T query(T a)
+  int query(T a)
   {
     auto it{lower_bound(dp.begin(), dp.end(), a)};
     auto value{*it};
