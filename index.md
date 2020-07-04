@@ -99,7 +99,7 @@ layout: default
 ### Strings
 
 * :warning: <a href="library/Strings/KMP.cpp.html">Strings/KMP.cpp</a>
-* :question: <a href="library/Strings/SuffixArray.cpp.html">Strings/SuffixArray.cpp</a>
+* :heavy_check_mark: <a href="library/Strings/SuffixArray.cpp.html">Strings/SuffixArray.cpp</a>
 * :warning: <a href="library/Strings/ZAlgorithm.cpp.html">Strings/ZAlgorithm.cpp</a>
 
 
@@ -139,7 +139,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/Flow/tests/MaxFlow.test.cpp.html">Flow/tests/MaxFlow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Graph/tests/WarshallFloyd.test.cpp.html">Graph/tests/WarshallFloyd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Strings/tests/SuffixArray_1.test.cpp.html">Strings/tests/SuffixArray_1.test.cpp</a>
-* :x: <a href="verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
 * :heavy_check_mark: <a href="verify/example.test.cpp.html">example.test.cpp</a>
 
 

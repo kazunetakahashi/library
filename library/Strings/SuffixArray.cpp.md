@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: Strings/SuffixArray.cpp
+# :heavy_check_mark: Strings/SuffixArray.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#89be9433646f5939040a78971a5d103a">Strings</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/SuffixArray.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-05 02:30:13+09:00
+    - Last commit date: 2020-07-05 02:41:37+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_1.test.cpp.html">Strings/tests/SuffixArray_1.test.cpp</a>
-* :x: <a href="../../verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
 
 
 ## Code
@@ -245,25 +245,6 @@ private:
 
 // ----- main() -----
 
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D&lang=ja
-
-void solve_contain()
-{
-  string S;
-  int Q;
-  cin >> S >> Q;
-  vector<string> T(Q);
-  for (auto i = 0; i < Q; i++)
-  {
-    cin >> T[i];
-  }
-  SuffixArray<string> sa(S);
-  for (auto i = 0; i < Q; i++)
-  {
-    cout << (sa.contain(T[i]) ? 1 : 0) << endl;
-  }
-}
-
 void solve_count()
 {
   string S, T;
@@ -271,8 +252,6 @@ void solve_count()
   SuffixArray<string> sa(S);
   cout << sa.count(T) << endl;
 }
-
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528
 
 template <typename T>
 void ch_max(T &left, T right)
@@ -289,23 +268,14 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
+  for (auto i = 0; i < static_cast<int>(U.size()); i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP(i, i + 1));
+      ch_max(ans, sa.LCP()[i]);
     }
   }
   return ans;
-}
-
-void solve_common_sub_string()
-{
-  string S, T;
-  while (cin >> S >> T)
-  {
-    cout << common_sub_string(S, T) << endl;
-  }
 }
 
 ```
@@ -513,25 +483,6 @@ private:
 
 // ----- main() -----
 
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D&lang=ja
-
-void solve_contain()
-{
-  string S;
-  int Q;
-  cin >> S >> Q;
-  vector<string> T(Q);
-  for (auto i = 0; i < Q; i++)
-  {
-    cin >> T[i];
-  }
-  SuffixArray<string> sa(S);
-  for (auto i = 0; i < Q; i++)
-  {
-    cout << (sa.contain(T[i]) ? 1 : 0) << endl;
-  }
-}
-
 void solve_count()
 {
   string S, T;
@@ -539,8 +490,6 @@ void solve_count()
   SuffixArray<string> sa(S);
   cout << sa.count(T) << endl;
 }
-
-// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528
 
 template <typename T>
 void ch_max(T &left, T right)
@@ -557,23 +506,14 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
+  for (auto i = 0; i < static_cast<int>(U.size()); i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP(i, i + 1));
+      ch_max(ans, sa.LCP()[i]);
     }
   }
   return ans;
-}
-
-void solve_common_sub_string()
-{
-  string S, T;
-  while (cin >> S >> T)
-  {
-    cout << common_sub_string(S, T) << endl;
-  }
 }
 
 ```
