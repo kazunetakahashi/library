@@ -4,5 +4,9 @@
 
 int main()
 {
-  solve_common_sub_string();
+  string S, T;
+  while (cin >> S >> T)
+  {
+    cout << common_sub_string(S, T) << endl;
+  }
 }
