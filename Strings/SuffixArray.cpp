@@ -240,11 +240,11 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()); i++)
+  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP()[i]);
+      ch_max(ans, sa.LCP(i, i + 1));
     }
   }
   return ans;
