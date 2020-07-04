@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Strings/tests/SuffixArray_2.test.cpp
+# :x: Strings/tests/SuffixArray_2.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#57d4581aaf4a3eff76a11de483c97ff2">Strings/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/tests/SuffixArray_2.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-07 04:26:09+09:00
+    - Last commit date: 2020-07-05 02:30:13+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Strings/SuffixArray.cpp.html">Strings/SuffixArray.cpp</a>
+* :question: <a href="../../../library/Strings/SuffixArray.cpp.html">Strings/SuffixArray.cpp</a>
 
 
 ## Code
@@ -305,11 +305,11 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()); i++)
+  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP()[i]);
+      ch_max(ans, sa.LCP(i, i + 1));
     }
   }
   return ans;

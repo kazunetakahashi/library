@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Strings/SuffixArray.cpp
+# :question: Strings/SuffixArray.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#89be9433646f5939040a78971a5d103a">Strings</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/SuffixArray.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-07 04:26:09+09:00
+    - Last commit date: 2020-07-05 02:30:13+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_1.test.cpp.html">Strings/tests/SuffixArray_1.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
+* :x: <a href="../../verify/Strings/tests/SuffixArray_2.test.cpp.html">Strings/tests/SuffixArray_2.test.cpp</a>
 
 
 ## Code
@@ -289,11 +289,11 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()); i++)
+  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP()[i]);
+      ch_max(ans, sa.LCP(i, i + 1));
     }
   }
   return ans;
@@ -557,11 +557,11 @@ int common_sub_string(string const &S, string const &T)
   int L{static_cast<int>(S.size())};
   SuffixArray<string> sa{U};
   int ans{0};
-  for (auto i = 0; i < static_cast<int>(U.size()); i++)
+  for (auto i = 0; i < static_cast<int>(U.size()) - 1; i++)
   {
     if ((sa[i] < L) ^ (sa[i + 1] < L))
     {
-      ch_max(ans, sa.LCP()[i]);
+      ch_max(ans, sa.LCP(i, i + 1));
     }
   }
   return ans;
