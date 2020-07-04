@@ -196,14 +196,6 @@ private:
 
 // ----- main() -----
 
-void solve_count()
-{
-  string S, T;
-  cin >> S >> T;
-  SuffixArray<string> sa(S);
-  cout << sa.count(T) << endl;
-}
-
 template <typename T>
 void ch_max(T &left, T right)
 {

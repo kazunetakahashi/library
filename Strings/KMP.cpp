@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <string>
 using namespace std;
@@ -27,9 +28,19 @@ public:
     }
   }
 
-  int operator[](int i) { return A[i]; }
+  int operator[](int i) const { return A[i]; }
 
-  vector<int> place(Type const &T)
+  int period(int i) const
+  { // The period of S[0, i).
+    auto tmp{i - A[i]};
+    if (i % tmp == 0)
+    {
+      return tmp;
+    }
+    return i;
+  }
+
+  vector<int> place(Type const &T) const
   {
     vector<int> res;
     int j{0};
@@ -49,7 +60,7 @@ public:
     return res;
   }
 
-  vector<bool> table(Type const &T)
+  vector<bool> table(Type const &T) const
   {
     vector<bool> res(T.size(), false);
     for (auto e : place(T))
