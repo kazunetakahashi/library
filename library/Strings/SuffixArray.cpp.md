@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#89be9433646f5939040a78971a5d103a">Strings</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/SuffixArray.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-05 02:41:37+09:00
+    - Last commit date: 2020-07-05 05:56:11+09:00
 
 
 
@@ -244,14 +244,6 @@ private:
 };
 
 // ----- main() -----
-
-void solve_count()
-{
-  string S, T;
-  cin >> S >> T;
-  SuffixArray<string> sa(S);
-  cout << sa.count(T) << endl;
-}
 
 template <typename T>
 void ch_max(T &left, T right)
@@ -482,14 +474,6 @@ private:
 };
 
 // ----- main() -----
-
-void solve_count()
-{
-  string S, T;
-  cin >> S >> T;
-  SuffixArray<string> sa(S);
-  cout << sa.count(T) << endl;
-}
 
 template <typename T>
 void ch_max(T &left, T right)

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#57d4581aaf4a3eff76a11de483c97ff2">Strings/tests</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Strings/tests/SuffixArray_2.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-05 02:41:37+09:00
+    - Last commit date: 2020-07-05 05:56:11+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0528</a>
@@ -264,14 +264,6 @@ private:
 };
 
 // ----- main() -----
-
-void solve_count()
-{
-  string S, T;
-  cin >> S >> T;
-  SuffixArray<string> sa(S);
-  cout << sa.count(T) << endl;
-}
 
 template <typename T>
 void ch_max(T &left, T right)
