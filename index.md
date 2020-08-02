@@ -45,6 +45,7 @@ layout: default
 
 ### DataStructure
 
+* :heavy_check_mark: <a href="library/DataStructure/BIT.cpp.html">DataStructure/BIT.cpp</a>
 * :warning: <a href="library/DataStructure/RangeAddQuery.cpp.html">DataStructure/RangeAddQuery.cpp</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegTree.cpp.html">DataStructure/SegTree.cpp</a>
 * :warning: <a href="library/DataStructure/UnionFind.cpp.html">DataStructure/UnionFind.cpp</a>
@@ -127,6 +128,7 @@ layout: default
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/DP-Typical/tests/LIS.test.cpp.html">DP-Typical/tests/LIS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/DataStructure/tests/BIT.test.cpp.html">DataStructure/tests/BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RAQ.test.cpp.html">DataStructure/tests/RMQ_RAQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RMQ_RUQ.test.cpp.html">DataStructure/tests/RMQ_RUQ.test.cpp</a>
 * :heavy_check_mark: <a href="verify/DataStructure/tests/RSQ_RUQ.test.cpp.html">DataStructure/tests/RSQ_RUQ.test.cpp</a>
