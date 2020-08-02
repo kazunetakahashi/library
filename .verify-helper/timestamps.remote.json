@@ -1,5 +1,6 @@
 {
 "DP-Typical/tests/LIS.test.cpp": "2020-07-02 20:09:49 +0900",
+"DataStructure/tests/BIT.test.cpp": "2020-08-03 07:42:19 +0900",
 "DataStructure/tests/RMQ_RAQ.test.cpp": "2020-06-18 07:39:30 +0900",
 "DataStructure/tests/RMQ_RUQ.test.cpp": "2020-06-18 07:39:30 +0900",
 "DataStructure/tests/RSQ_RUQ.test.cpp": "2020-06-18 07:39:30 +0900",
